@@ -39,10 +39,14 @@ model User {
     name          String?
     email         String?   @unique
     emailVerified DateTime?
+    createdAt     DateTime  @default(now())
+    description   String    @default("No description yet")  
     image         String?
     accounts      Account[]
     sessions      Session[]
     rooms         Room[]
+    friends         User[]   @relation("UserFriends")
+    friendsOf       User[]   @relation("UserFriends")
 }
 
 model VerificationToken {
