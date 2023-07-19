@@ -7,8 +7,8 @@ const Homepage = () => {
         <>
             <Typography variant='h2'>Witaj w Postify</Typography>
             <Typography variant='body1'>
-                Stworz wlasny chat lub dołącz do wielu innych ktore cie
-                zainteresuja!
+                Stwórz wlasny chat lub dołącz do wielu innych ktore cie
+                zainteresują!
             </Typography>
             <hr />
             <Grid container spacing={2} sx={{ minHeight: "80vh" }}>

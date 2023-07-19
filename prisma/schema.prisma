@@ -64,9 +64,10 @@ model Tag {
 model Room {
   id          Int      @id @default(autoincrement())
   name        String
-  isPublic    Boolean
+  isPublic    Boolean? @default(true)
   ownerId     String?
   owner       User?    @relation(fields: [ownerId], references: [id])
+  password    String?
   tags        Tag[]
   messages    Message[]
 }

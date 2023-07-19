@@ -6,9 +6,9 @@ import Layout from "~/components/Layout";
 import Homepage from "~/components/Homepage";
 export default function Home() {
     const logged = useIsLogged();
-    if (!logged) {
-        return <SignIn />;
-    }
+    // if (!logged) {
+    //     return <SignIn />;
+    // }
     return (
         <>
             <Head>

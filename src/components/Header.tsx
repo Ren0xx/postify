@@ -28,7 +28,8 @@ const Header = () => {
                                 justifyContent: "space-between",
                                 alignItems: "center",
                                 gap: 2,
-                            }}>
+                            }}
+                            id='authenticated'>
                             <Avatar
                                 alt='Profile picture'
                                 src={
