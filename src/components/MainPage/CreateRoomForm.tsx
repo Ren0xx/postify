@@ -1,4 +1,3 @@
-import React from "react";
 import {
     Button,
     Dialog,
@@ -9,7 +8,7 @@ import {
 } from "@mui/material";
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import useCreateRoom from "@/hooks/useCreateRoom";
-import ErrorSnackbar from "@/components/Room/RoomExistsSnackbar";
+import ErrorSnackbar from "@/components/MainPage/RoomExistsSnackbar";
 const CreateRoomForm = () => {
     const {
         open,
@@ -100,7 +99,7 @@ const CreateRoomForm = () => {
                     </DialogActions>
                 </form>
             </Dialog>
-            <ErrorSnackbar open={nameTaken}  />
+            <ErrorSnackbar open={nameTaken} />
         </>
     );
 };

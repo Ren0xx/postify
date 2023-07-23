@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
 
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
@@ -13,7 +14,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
     return (
         <SessionProvider session={session}>
             <Header />
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
             <Footer />
         </SessionProvider>
     );
