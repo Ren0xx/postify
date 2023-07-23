@@ -1,9 +1,9 @@
-import { roomRouter } from "~/server/api/routers/room";
-import { messageRouter } from "~/server/api/routers/message";
-import { userRouter } from "~/server/api/routers/user";
-import { tagRouter } from "~/server/api/routers/tag";
+import { roomRouter } from "@/server/api/routers/room";
+import { messageRouter } from "@/server/api/routers/message";
+import { userRouter } from "@/server/api/routers/user";
+import { tagRouter } from "@/server/api/routers/tag";
 
-import { createTRPCRouter } from "~/server/api/trpc";
+import { createTRPCRouter } from "@/server/api/trpc";
 
 /**
  * This is the primary router for your server.

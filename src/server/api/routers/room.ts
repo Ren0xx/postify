@@ -3,30 +3,47 @@ import {
     createTRPCRouter,
     publicProcedure,
     protectedProcedure,
-} from "~/server/api/trpc";
+} from "@/server/api/trpc";
 
 export const roomRouter = createTRPCRouter({
     createPublic: protectedProcedure
         .input(z.object({ name: z.string() }))
-        .mutation(({ ctx, input }) => {
+        .mutation(async ({ ctx, input }) => {
             return ctx.prisma.room.create({
                 data: {
                     name: input.name,
-                    ownerId: ctx.session.user.id
-                }
+                    ownerId: ctx.session.user.id,
+                },
             });
         }),
     createPrivate: protectedProcedure
-        .input(z.object({ name: z.string(), password: z.string(), isPublic: z.boolean() }))
-        .mutation(({ ctx, input }) => {
+        .input(
+            z.object({
+                name: z.string(),
+                password: z.string(),
+                isPublic: z.boolean(),
+            })
+        )
+        .mutation(async ({ ctx, input }) => {
+
             return ctx.prisma.room.create({
                 data: {
                     name: input.name,
-                    password: input.password,
-                    isPublic: input.isPublic,
                     ownerId: ctx.session.user.id,
-                }
+                },
             });
-        }),
-});
 
+        }),
+    nameAlreadyTaken: protectedProcedure
+        .input(
+            z.object({
+                name: z.string()
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            return ctx.prisma.room.findFirst({
+                where: { name: input.name }
+            });
+        })
+
+});

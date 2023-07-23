@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import RoomChat from "~/components/Room/RoomChat";
+import RoomChat from "@/components/Room/RoomChat";
 import RoomsList from "./Room/RoomsList";
 import CreateRoomForm from "./Room/CreateRoomForm";
 const Homepage = () => {

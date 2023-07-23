@@ -1,81 +1,38 @@
-"use client";
+import React from "react";
 import {
     Button,
-    Checkbox,
-    FormGroup,
-    FormControlLabel,
     Dialog,
     DialogTitle,
     DialogContent,
     DialogActions,
     TextField,
 } from "@mui/material";
-import { api } from "~/utils/api";
-import * as yup from "yup";
-import { useState } from "react";
-import { useFormik } from "formik";
-
-const validationSchema = yup.object({
-    name: yup
-        .string()
-        .required("To pole jest wymagane")
-        .min(1, "Wypełnij to pole")
-        .max(50, "Nazwa nie może byc dłuzsza niz 50 znaków"),
-    isPrivate: yup.boolean(),
-    password: yup.string().when("isPrivate", {
-        is: true,
-        then: (validationSchema) =>
-            validationSchema
-                .required("Pole nie moze byc puste")
-                .min(4, "Hasło musi byc dluższe niż 4 znaki.")
-                .max(20, "Hasło nie moze byc dluższe niz 20 znaków."),
-    }),
-});
+import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import useCreateRoom from "@/hooks/useCreateRoom";
+import ErrorSnackbar from "@/components/Room/RoomExistsSnackbar";
 const CreateRoomForm = () => {
-    const [open, setOpen] = useState(false);
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const formik = useFormik({
-        initialValues: {
-            name: "",
-            isPrivate: false,
-            password: "",
-        },
-        validationSchema: validationSchema,
-        onSubmit: (values, { resetForm }) => {
-            if (values.isPrivate) {
-                createPrivateRoom.mutate({
-                    name: values.name,
-                    isPublic: !values.isPrivate,
-                    password: values.password,
-                });
-                resetForm();
-                return;
-            }
-            createPublicRoom.mutate({ name: values.name });
-            resetForm();
-        },
-    });
-    const createPrivateRoom = api.room.createPrivate.useMutation({});
-    const createPublicRoom = api.room.createPublic.useMutation({});
+    const {
+        open,
+        handleClose,
+        handleClickOpen,
+        formik,
+        isRefetching,
+        nameTaken,
+    } = useCreateRoom();
     return (
         <>
             <Button
                 variant='contained'
                 onClick={handleClickOpen}
                 id='open-create-room-form'>
-                Stworz pokoj
+                Stwórz pokój
             </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 aria-labelledby='room-create'
                 aria-describedby='room-dialog-description'>
-                <DialogTitle id='alert-dialog-title'>Stworz pokoj</DialogTitle>
+                <DialogTitle id='alert-dialog-title'>Stwórz pokój</DialogTitle>
                 <form onSubmit={formik.handleSubmit}>
                     <DialogContent>
                         <TextField
@@ -106,7 +63,7 @@ const CreateRoomForm = () => {
                                         onChange={formik.handleChange}
                                     />
                                 }
-                                label='Pokoj prywatny'
+                                label='Pokój prywatny'
                             />
                         </FormGroup>
                         <TextField
@@ -133,21 +90,19 @@ const CreateRoomForm = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button
-                            onClick={() => {
-                                if (Object.keys(formik.errors).length === 0) {
-                                    handleClose();
-                                }
-                            }}
+                            onClick={handleClose}
                             autoFocus
                             id='create-room'
-                            disabled={formik.values.name === ""}
+                            disabled={formik.values.name === "" || isRefetching}
                             type='submit'>
-                            Utworz
+                            Utwórz
                         </Button>
                     </DialogActions>
                 </form>
             </Dialog>
+            <ErrorSnackbar open={nameTaken}  />
         </>
     );
 };
+
 export default CreateRoomForm;
