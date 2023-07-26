@@ -1,3 +1,4 @@
+import data from '../fixtures/session.json';
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -35,7 +36,6 @@
 //     }
 //   }
 // }
-import data from '../fixtures/session.json';
 
 Cypress.Commands.add('login', () => {
     cy.intercept("/api/auth/session", { fixture: "session.json" }).as("session");

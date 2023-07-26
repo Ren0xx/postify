@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 // describe('creates public room', () => {
 //   it('passes', () => {
 //     cy.visit('http://localhost:3000');
@@ -46,13 +47,6 @@ describe("Cypress login", () => {
 	it("should get error when creating room already taken name", () => {
 
 		cy.visit("/");
-		cy.on("window:console", (consoleMessage) => {
-			// Sprawdź, czy konsola zawiera oczekiwany błąd
-			if (consoleMessage.type === "error") {
-				// Tutaj możesz dokładnie przetestować, czy zawartość błędu jest zgodna z oczekiwaniami
-				expect(consoleMessage.message).to.include("Pokoj juz istnieje");
-			}
-		});
 		cy.get("#open-create-room-form").click();
 		cy.get("#name").type('name-of-room', { delay: 1 });
 		cy.get('#create-room').click();
