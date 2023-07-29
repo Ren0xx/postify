@@ -47,7 +47,7 @@ export const roomRouter = createTRPCRouter({
         }),
 
     getOne: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
-        return ctx.prisma.room.findUnique({ where: { id: input.id }, include: { owner: true, tags: true, allowedUsers: true } });
+        return ctx.prisma.room.findUnique({ where: { id: input.id }, include: { owner: true, tags: true, allowedUsers: true, messages: true } });
 
 
     }),

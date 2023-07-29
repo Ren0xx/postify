@@ -46,10 +46,10 @@ model User {
   sessions      Session[]
   friends       User[]    @relation("UserFriends")
   friendsOf     User[]    @relation("UserFriends")
-  allowedRooms  Room[]    @relation(name: "RoomAllowedUsers") 
-  roomsOwned Room[]
+  allowedRooms  Room[]    @relation(name: "RoomAllowedUsers")
+  roomsOwned    Room[]
+  Messages       Message[]
 }
-
 
 model VerificationToken {
   identifier String
@@ -84,4 +84,6 @@ model Message {
   room      Room     @relation(fields: [roomId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  creator   User     @relation(fields: [creatorId], references: [id])
+  creatorId    String
 }

@@ -1,14 +1,14 @@
 import { Box, Grid } from "@mui/material";
-import { type RouterOutputs, api } from "@/utils/api";
+import { api, type RouterOutputs } from "@/utils/api";
 import Head from "next/head";
 import RoomChat from "@/components/MainPage/RoomChat";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
+type Message = RouterOutputs["message"]["getOne"];
 import Loading from "@/components/utils/Loading";
-import LoadingError from "@/components/utils/Error";
+import RoomNotFound from "@/components/utils/RoomNotFound";
 import NotAuthorized from "@/components/utils/NotAuthorized";
-type Room = RouterOutputs["room"]["getOne"];
 export default function Room() {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -33,24 +33,23 @@ export default function Room() {
             </>
         );
     }
-    if (isError) {
+    if (isError || room === null) {
         return (
             <>
                 <Head>
                     <title>The error occured</title>
                 </Head>
-                <LoadingError />;
+                <RoomNotFound />
             </>
         );
     }
     const isUserAllowed = room?.allowedUsers.some(
         (user) => user.id === sessionData?.user.id
     );
-    const isOwner = room?.ownerId === sessionData?.user.id; 
-    if (!isUserAllowed && !isOwner) {
+    const isOwner = room?.ownerId === sessionData?.user.id;
+    if (!isUserAllowed && !isOwner && !isError) {
         return <NotAuthorized />;
     }
-
     return (
         <>
             <Head>
@@ -59,8 +58,12 @@ export default function Room() {
                 </title>
             </Head>
             <Box>
-                <h1>Hi from room ;room name</h1>
-                <RoomChat />
+                <h1>Hi from room {room?.name}</h1>
+                <RoomChat
+                    id={room.id}
+                    messages={room.messages as Message[]}
+                    name={room.name}
+                />
             </Box>
         </>
     );
