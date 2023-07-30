@@ -1,4 +1,5 @@
 import supabase from "@/utils/db/supabase";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import MessageCard from "@/components/ChatRoom/MessageCard";
 import { type RouterOutputs } from "@/utils/api";
@@ -8,9 +9,11 @@ type RoomChatProps = {
     name: string;
     messages: Message[];
     id: string;
+    userName?: string | null;
+    userImage?: string | null;
 };
 const RoomChat = (props: RoomChatProps) => {
-    const { name, messages, id } = props;
+    const { name, messages, id, userName, userImage } = props;
     const [rtMessages, setMessages] = useState<Message[]>(messages);
 
     useEffect(() => {
@@ -25,7 +28,10 @@ const RoomChat = (props: RoomChatProps) => {
                     filter: `roomId=eq.${id}`,
                 },
                 (payload) => {
-                    setMessages([...rtMessages, payload.new as Message]);
+                    setMessages((prevMessages) => [
+                        ...prevMessages,
+                        payload.new as Message,
+                    ]);
                 }
             )
             .subscribe();
@@ -33,22 +39,23 @@ const RoomChat = (props: RoomChatProps) => {
             void supabase.removeChannel(channel);
         };
     }, [rtMessages, id]);
-
     return (
         <>
             <div>
                 <h1>{name}</h1>
             </div>
-            <div>
+            <Box sx={{ maxHeight: "400px" }}>
                 {rtMessages?.map((message: Message) => (
                     <MessageCard
                         key={message?.id}
                         content={message?.content ?? ""}
-                        userImage={message?.creator?.image || ""}
+                        updatedAt={message?.updatedAt}
+                        image={message?.creator?.image ?? userImage}
+                        name={message?.creator?.name ?? userName}
                     />
                 ))}
                 <MessageForm roomId={id} />
-            </div>
+            </Box>
         </>
     );
 };

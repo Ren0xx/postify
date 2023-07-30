@@ -18,7 +18,6 @@ export default function Room() {
         data: room,
         isLoading,
         isError,
-        refetch,
     } = api.room.getOne.useQuery(
         { id: roomId },
         { enabled: sessionData?.user !== undefined }
@@ -57,14 +56,13 @@ export default function Room() {
                     Pokoj &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
                 </title>
             </Head>
-            <Box>
-                <h1>Hi from room {room?.name}</h1>
-                <RoomChat
-                    id={room.id}
-                    messages={room.messages as Message[]}
-                    name={room.name}
-                />
-            </Box>
+            <RoomChat
+                id={room.id}
+                messages={room.messages as Message[]}
+                name={room.name}
+                userName={sessionData?.user.name}
+                userImage={sessionData?.user.image}
+            />
         </>
     );
 }
