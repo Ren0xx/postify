@@ -4,4 +4,11 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "@/server/api/trpc";
-export const tagRouter = createTRPCRouter({});
+export const tagRouter = createTRPCRouter({
+  getOne: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
+    return ctx.prisma.tag.findUnique({ where: { id: input.id } });
+
+
+  }),
+
+});

@@ -1,5 +1,5 @@
 import supabase from "@/utils/db/supabase";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import MessageCard from "@/components/ChatRoom/MessageCard";
 import { type RouterOutputs } from "@/utils/api";
@@ -40,11 +40,12 @@ const RoomChat = (props: RoomChatProps) => {
         };
     }, [rtMessages, id]);
     return (
-        <>
+        <div>
             <div>
                 <h1>{name}</h1>
             </div>
-            <Box sx={{ maxHeight: "400px" }}>
+            
+            <Box>
                 {rtMessages?.map((message: Message) => (
                     <MessageCard
                         key={message?.id}
@@ -56,7 +57,7 @@ const RoomChat = (props: RoomChatProps) => {
                 ))}
                 <MessageForm roomId={id} />
             </Box>
-        </>
+        </div>
     );
 };
 

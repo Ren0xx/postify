@@ -8,9 +8,5 @@ export default function Home() {
     if (!logged) {
         return <SignIn />;
     }
-    return (
-        <>
-            <Homepage />
-        </>
-    );
+    return <Homepage />;
 }

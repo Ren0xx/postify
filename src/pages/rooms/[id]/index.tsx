@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 type Message = RouterOutputs["message"]["getOne"];
+type Tag = RouterOutputs["tag"]["getOne"]
+import AdminSection from "@/components/ChatRoom/AdminSection";
+import TagsSection from "@/components/ChatRoom/TagsSection";
 import Loading from "@/components/utils/Loading";
 import RoomNotFound from "@/components/utils/RoomNotFound";
 import NotAuthorized from "@/components/utils/NotAuthorized";
@@ -53,9 +56,11 @@ export default function Room() {
         <>
             <Head>
                 <title>
-                    Pokoj &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
+                    Pokój &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
                 </title>
             </Head>
+            {isOwner && <AdminSection />}
+            <TagsSection tags={room.tags as Tag[]} />
             <RoomChat
                 id={room.id}
                 messages={room.messages as Message[]}
