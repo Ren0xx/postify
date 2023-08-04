@@ -51,5 +51,12 @@ export const roomRouter = createTRPCRouter({
 
 
     }),
+    addToAllowedUsers: protectedProcedure.input(z.object({ roomId: z.string() })).mutation(async ({ ctx, input }) => {
+        return ctx.prisma.room.update({
+            where: { id: input.roomId },
+            data: { allowedUsers: { connect: { id: ctx.session.user.id } } },
+        });
+
+    })
 
 });

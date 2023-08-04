@@ -7,19 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -38,17 +37,17 @@ model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
-  emailVerified DateTime?
-  createdAt     DateTime  @default(now())
+  emailVerified DateTime? @db.Timestamptz(6)
+  createdAt     DateTime  @db.Timestamptz(6)
   description   String    @default("No description yet")
   image         String?
   accounts      Account[]
-  sessions      Session[]
-  friends       User[]    @relation("UserFriends")
-  friendsOf     User[]    @relation("UserFriends")
-  allowedRooms  Room[]    @relation(name: "RoomAllowedUsers")
+  Messages      Message[]
   roomsOwned    Room[]
-  Messages       Message[]
+  sessions      Session[]
+  allowedRooms  Room[]    @relation("RoomAllowedUsers")
+  User_A        User[]    @relation("UserFriends")
+  User_B        User[]    @relation("UserFriends")
 }
 
 model VerificationToken {
@@ -62,7 +61,7 @@ model VerificationToken {
 model Tag {
   id    String @id @default(cuid())
   name  String @unique
-  rooms Room[]
+  rooms Room[] @relation("RoomToTag")
 }
 
 model Room {
@@ -70,20 +69,20 @@ model Room {
   name         String
   isPublic     Boolean?  @default(true)
   ownerId      String?
-  owner        User?     @relation(fields: [ownerId], references: [id])
   password     String?
-  tags         Tag[]
   messages     Message[]
-  allowedUsers User[]    @relation(name: "RoomAllowedUsers")
+  owner        User?     @relation(fields: [ownerId], references: [id])
+  allowedUsers User[]    @relation("RoomAllowedUsers")
+  tags         Tag[]     @relation("RoomToTag")
 }
 
 model Message {
   id        String   @id @default(cuid())
   content   String
   roomId    String
-  room      Room     @relation(fields: [roomId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @db.Timestamptz(6)
+  creatorId String
   creator   User     @relation(fields: [creatorId], references: [id])
-  creatorId    String
+  room      Room     @relation(fields: [roomId], references: [id])
 }

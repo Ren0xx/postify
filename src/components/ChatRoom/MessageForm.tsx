@@ -19,6 +19,11 @@ const MessageForm = (props: MessageProps) => {
         });
         setContent("");
     };
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            createOne();
+        }
+    };
     return (
         <Box>
             <TextField
@@ -27,9 +32,10 @@ const MessageForm = (props: MessageProps) => {
                 label='Napisz coś...'
                 id='message-content-field'
                 onChange={handleChange}
+                onKeyDown={handleKeyPress}
             />
             <Button onClick={createOne} disabled={content === ""}>
-                Dodaj wiadomosc
+                Dodaj wiadomość
             </Button>
         </Box>
     );

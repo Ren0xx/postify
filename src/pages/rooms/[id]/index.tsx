@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 type Message = RouterOutputs["message"]["getOne"];
-type Tag = RouterOutputs["tag"]["getOne"]
+type Tag = RouterOutputs["tag"]["getOne"];
 import AdminSection from "@/components/ChatRoom/AdminSection";
 import TagsSection from "@/components/ChatRoom/TagsSection";
 import Loading from "@/components/utils/Loading";
@@ -21,10 +21,19 @@ export default function Room() {
         data: room,
         isLoading,
         isError,
+        refetch,
     } = api.room.getOne.useQuery(
         { id: roomId },
         { enabled: sessionData?.user !== undefined }
     );
+    const deleteOne = api.tag.removeOne.useMutation({
+        onSuccess: () => {
+            void refetch();
+        },
+    });
+    const deleteTag = (id: string) => {
+        void deleteOne.mutateAsync({ id });
+    };
     if (isLoading) {
         return (
             <>
@@ -50,8 +59,10 @@ export default function Room() {
     );
     const isOwner = room?.ownerId === sessionData?.user.id;
     if (!isUserAllowed && !isOwner && !isError) {
-        return <NotAuthorized />;
+        return <NotAuthorized password={room.password} roomId={room.id} />;
     }
+    console.log(room.id);
+
     return (
         <>
             <Head>
@@ -60,7 +71,7 @@ export default function Room() {
                 </title>
             </Head>
             {isOwner && <AdminSection />}
-            <TagsSection tags={room.tags as Tag[]} />
+            <TagsSection tags={room.tags as Tag[]} deleteTag={deleteTag} />
             <RoomChat
                 id={room.id}
                 messages={room.messages as Message[]}

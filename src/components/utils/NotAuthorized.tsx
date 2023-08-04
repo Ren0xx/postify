@@ -1,11 +1,21 @@
-const NotAuthorized = () => {
+import { Box, Stack } from "@mui/material";
+import RoomPasswordForm from "@/components/ChatRoom/RoomPasswordForm";
+type AuthProps = {
+    password?: string | null;
+    roomId: string;
+};
+const NotAuthorized = (props: AuthProps) => {
+    const { password, roomId } = props;
     return (
-        <div>
-            <h2>You are not authorized to see this room.</h2>
-            <p>Podaj haslo jesli chcesz wejsc</p>
-            <label>Haslo do pokoju</label>
-            <input />
-        </div>
+        <Stack
+            direction='column'
+            justifyContent='center'
+            alignItems='center'
+            spacing={2}>
+            <h1>Nie możesz wejść do tego pokoju.</h1>
+            <h4>Podaj hasło.</h4>
+            <RoomPasswordForm password={password} roomId={roomId} />
+        </Stack>
     );
 };
 
