@@ -57,6 +57,8 @@ export const roomRouter = createTRPCRouter({
             data: { allowedUsers: { connect: { id: ctx.session.user.id } } },
         });
 
+    }),
+    removeOne: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
+        return ctx.prisma.room.delete({ where: { id: input.id } });
     })
-
 });

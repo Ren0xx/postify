@@ -9,6 +9,7 @@ type Message = RouterOutputs["message"]["getOne"];
 type Tag = RouterOutputs["tag"]["getOne"];
 import AdminSection from "@/components/ChatRoom/AdminSection";
 import TagsSection from "@/components/ChatRoom/TagsSection";
+import InfoSection from "@/components/ChatRoom/InfoSection";
 import Loading from "@/components/utils/Loading";
 import RoomNotFound from "@/components/utils/RoomNotFound";
 import NotAuthorized from "@/components/utils/NotAuthorized";
@@ -61,7 +62,6 @@ export default function Room() {
     if (!isUserAllowed && !isOwner && !isError) {
         return <NotAuthorized password={room.password} roomId={room.id} />;
     }
-    console.log(room.id);
 
     return (
         <>
@@ -70,8 +70,9 @@ export default function Room() {
                     Pokój &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
                 </title>
             </Head>
-            {isOwner && <AdminSection />}
+            <InfoSection name={room.name} />
             <TagsSection tags={room.tags as Tag[]} deleteTag={deleteTag} />
+            {isOwner && <AdminSection roomId={room.id}/>}
             <RoomChat
                 id={room.id}
                 messages={room.messages as Message[]}

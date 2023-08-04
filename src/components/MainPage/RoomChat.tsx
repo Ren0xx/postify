@@ -40,24 +40,18 @@ const RoomChat = (props: RoomChatProps) => {
         };
     }, [rtMessages, id]);
     return (
-        <div>
-            <div>
-                <h1>{name}</h1>
-            </div>
-            
-            <Box>
-                {rtMessages?.map((message: Message) => (
-                    <MessageCard
-                        key={message?.id}
-                        content={message?.content ?? ""}
-                        updatedAt={message?.updatedAt}
-                        image={message?.creator?.image ?? userImage}
-                        name={message?.creator?.name ?? userName}
-                    />
-                ))}
-                <MessageForm roomId={id} />
-            </Box>
-        </div>
+        <Box>
+            {rtMessages?.map((message: Message) => (
+                <MessageCard
+                    key={message?.id}
+                    content={message?.content ?? ""}
+                    updatedAt={message?.updatedAt}
+                    image={message?.creator?.image ?? userImage}
+                    name={message?.creator?.name ?? userName}
+                />
+            ))}
+            <MessageForm roomId={id} />
+        </Box>
     );
 };
 

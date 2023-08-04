@@ -1,4 +1,4 @@
-import { Chip } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import { type RouterOutputs } from "@/utils/api";
 type Tag = RouterOutputs["tag"]["getOne"];
 type TagProps = {
@@ -12,16 +12,17 @@ const TagsSection = (props: TagProps) => {
     };
 
     return (
-        <ul>
+        <Box component='ul' sx={{ p: 1 }}>
             {tags?.map((tag) => (
                 <Chip
                     key={tag?.id}
                     label={tag?.name ?? "Unknown"}
                     component='li'
+                    color='secondary'
                     onDelete={tag?.id ? () => handleDelete(tag.id) : undefined}
                 />
             ))}
-        </ul>
+        </Box>
     );
 };
 export default TagsSection;

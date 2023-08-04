@@ -1,13 +1,19 @@
 import { Box, Button } from "@mui/material";
-const AdminSection = () => {
+import DeleteRoomModal from "@/components/ChatRoom/DeleteRoomModal";
+import useDeleteRoom from "@/hooks/useDeleteRoom";
+type AdminProps = {
+    roomId: string;
+};
+const AdminSection = (props: AdminProps) => {
     return (
-        <Box sx={{ display: "flex", gap: "0.5em" }} component='ul'>
+        <Box
+            sx={{ display: "flex", gap: "0.5em", justifyContent: "flex-end" }}
+            component='ul'>
             <Button variant='contained'>Dodaj tagi</Button>
+
+            <DeleteRoomModal id={props.roomId} />
             <Button variant='contained' color='error'>
-                Usuń pokój
-            </Button>
-            <Button variant='contained' color='error'>
-                Wyrzuć użytkowników{" "}
+                Wyrzuć użytkowników
             </Button>
         </Box>
     );
