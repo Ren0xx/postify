@@ -19,5 +19,30 @@ export const tagRouter = createTRPCRouter({
     });
 
     return ctx.prisma.tag.delete({ where: { id: input.id } });
-  })
+  }),
+  createOne: protectedProcedure
+    .input(z.object({ name: z.string(), roomId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      const { name } = input;
+      const existingTag = await ctx.prisma.tag.findFirst({
+        where: {
+          name,
+          rooms: {
+            some: {
+              id: input.roomId,
+            },
+          },
+        },
+      });
+      if (existingTag) {
+        return null;
+      }
+
+      return ctx.prisma.tag.create({
+        data: {
+          name,
+          rooms: { connect: { id: input.roomId } }
+        },
+      });
+    }),
 });

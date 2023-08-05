@@ -12,7 +12,7 @@ type ModalProps = {
 const DeleteRoomModal = (props: ModalProps) => {
     const { open, handleClose, handleOpen, removeRoom } = useDeleteRoom();
     const handleClick = () => {
-        removeRoom(props.id);
+        void removeRoom(props.id);
     };
     return (
         <div>

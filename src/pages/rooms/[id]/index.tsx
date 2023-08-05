@@ -72,7 +72,14 @@ export default function Room() {
             </Head>
             <InfoSection name={room.name} />
             <TagsSection tags={room.tags as Tag[]} deleteTag={deleteTag} />
-            {isOwner && <AdminSection roomId={room.id}/>}
+            {isOwner && (
+                <AdminSection
+                    roomId={room.id}
+                    tags={room.tags as Tag[]}
+                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                    refetch={refetch}
+                />
+            )}
             <RoomChat
                 id={room.id}
                 messages={room.messages as Message[]}
