@@ -19,5 +19,9 @@ export const messageRouter = createTRPCRouter({
   getOne: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
     return ctx.prisma.message.findUnique({ where: { id: input.id }, include: { room: true, creator: true } });
 
-  })
+  }),
+  deleteOne: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
+
+    return ctx.prisma.message.delete({ where: { id: input.id } });
+  }),
 });

@@ -28,10 +28,19 @@ const RoomChat = (props: RoomChatProps) => {
                     filter: `roomId=eq.${id}`,
                 },
                 (payload) => {
-                    setMessages((prevMessages) => [
-                        ...prevMessages,
-                        payload.new as Message,
-                    ]);
+                    if (payload.eventType === "DELETE") {
+                        setMessages((prevMessages) =>
+                            prevMessages.filter((message: Message) => {
+                                if (message !== null)
+                                    message.id !== payload.old.id;
+                            })
+                        );
+                    } else if (payload.eventType === "INSERT") {
+                        setMessages((prevMessages) => [
+                            ...prevMessages,
+                            payload.new as Message,
+                        ]);
+                    }
                 }
             )
             .subscribe();
@@ -48,6 +57,8 @@ const RoomChat = (props: RoomChatProps) => {
                     updatedAt={message?.updatedAt}
                     image={message?.creator?.image ?? userImage}
                     name={message?.creator?.name ?? userName}
+                    creatorId={message?.creator?.id}
+                    id={message?.id}
                 />
             ))}
             <MessageForm roomId={id} />

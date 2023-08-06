@@ -1,20 +1,53 @@
-import { Avatar, Box, Paper, Stack, Grid, Link } from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Paper,
+    Stack,
+    Grid,
+    IconButton,
+    Link,
+} from "@mui/material";
 import slugify from "slugify";
+import { useRef } from "react";
 import { formatted } from "@/utils/dates/helperFuncs";
+import ClearIcon from "@mui/icons-material/Clear";
+import { useSession } from "next-auth/react";
+import { api } from "@/utils/api";
 type MessageProps = {
     content: string;
     updatedAt: Date | undefined;
     image?: string | null;
+    creatorId?: string | null;
     name?: string | null;
+    id?: string;
 };
 const MessageCard = (props: MessageProps) => {
-    const { content, updatedAt, image, name } = props;
+    const { data: sessionData } = useSession();
+    const { content, updatedAt, image, name, id, creatorId } = props;
+    const deleteButtonRef = useRef<HTMLButtonElement>(null);
+    const deleteOne = api.message.deleteOne.useMutation();
+
+    const handleDelete = () => {
+        if (!isAuthor) return;
+        if (id) void deleteOne.mutateAsync({ id });
+    };
+    const isAuthor = creatorId === sessionData?.user.id;
     return (
         <Box
             sx={{
                 flexGrow: 1,
                 p: 0.2,
                 m: 0,
+            }}
+            onMouseEnter={() => {
+                if (deleteButtonRef.current) {
+                    deleteButtonRef.current.style.opacity = "1";
+                }
+            }}
+            onMouseLeave={() => {
+                if (deleteButtonRef.current) {
+                    deleteButtonRef.current.style.opacity = "0";
+                }
             }}>
             <Grid container spacing={1}>
                 <Grid
@@ -41,6 +74,7 @@ const MessageCard = (props: MessageProps) => {
                             backgroundColor: "#dfdfdf",
                         },
                         borderRadius: "0.5em",
+                        display: "flex",
                     }}>
                     <Stack>
                         <Box
@@ -61,6 +95,24 @@ const MessageCard = (props: MessageProps) => {
                             <p>{content}</p>
                         </Box>
                     </Stack>
+                    {isAuthor ? (
+                        <IconButton
+                            ref={deleteButtonRef}
+                            sx={{
+                                opacity: 0,
+                                transition: "opacity 0.2s",
+                                ml: "auto",
+                                px: 4,
+                                "&:hover": {
+                                    // Remove hover effect
+                                    backgroundColor: "transparent",
+                                    color: "inherit",
+                                },
+                            }}
+                            onClick={handleDelete}>
+                            <ClearIcon fontSize='large' />
+                        </IconButton>
+                    ) : null}
                 </Grid>
             </Grid>
         </Box>
