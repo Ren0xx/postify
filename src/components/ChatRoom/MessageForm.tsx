@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { useState } from "react";
 import { api } from "@/utils/api";
 type MessageProps = {
@@ -11,21 +11,17 @@ const MessageForm = (props: MessageProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setContent(e.target.value);
     };
-    const createOne = () => {
-        if (content === "") return;
-        createMessage.mutate({
-            content,
-            roomId,
-        });
-        setContent("");
-    };
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            createOne();
+        if (event.key === "Enter" && content !== "") {
+            createMessage.mutate({
+                content,
+                roomId,
+            });
+            setContent("");
         }
     };
     return (
-        <Box>
+        <Box sx={{ mt: 2 }}>
             <TextField
                 fullWidth
                 value={content}
@@ -34,9 +30,6 @@ const MessageForm = (props: MessageProps) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}
             />
-            <Button onClick={createOne} disabled={content === ""}>
-                Dodaj wiadomość
-            </Button>
         </Box>
     );
 };

@@ -19,9 +19,6 @@ const AdminSection = (props: AdminProps) => {
                 refetch={props.refetch}
             />
             <DeleteRoomModal id={props.roomId} />
-            <Button variant='contained' color='error'>
-                Wyrzuć użytkowników
-            </Button>
         </Box>
     );
 };

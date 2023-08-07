@@ -1,12 +1,4 @@
-import {
-    Avatar,
-    Box,
-    Paper,
-    Stack,
-    Grid,
-    IconButton,
-    Link,
-} from "@mui/material";
+import { Avatar, Box, Stack, Grid, IconButton, Link } from "@mui/material";
 import slugify from "slugify";
 import { useRef } from "react";
 import { formatted } from "@/utils/dates/helperFuncs";
@@ -31,13 +23,19 @@ const MessageCard = (props: MessageProps) => {
         if (!isAuthor) return;
         if (id) void deleteOne.mutateAsync({ id });
     };
-    const isAuthor = creatorId === sessionData?.user.id;
+    const isAuthor =
+        creatorId === sessionData?.user.id || creatorId === undefined
+            ? true
+            : false;
     return (
         <Box
             sx={{
                 flexGrow: 1,
                 p: 0.2,
                 m: 0,
+                "&:hover": {
+                    cursor: "pointer",
+                },
             }}
             onMouseEnter={() => {
                 if (deleteButtonRef.current) {

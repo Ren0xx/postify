@@ -30,11 +30,12 @@ const RoomChat = (props: RoomChatProps) => {
                 (payload) => {
                     if (payload.eventType === "DELETE") {
                         setMessages((prevMessages) =>
-                            prevMessages.filter((message: Message) => {
-                                if (message !== null)
-                                    message.id !== payload.old.id;
-                            })
+                            prevMessages.filter(
+                                (message) =>
+                                    message && message.id !== payload.old.id
+                            )
                         );
+                        console.log(rtMessages);
                     } else if (payload.eventType === "INSERT") {
                         setMessages((prevMessages) => [
                             ...prevMessages,
@@ -61,6 +62,7 @@ const RoomChat = (props: RoomChatProps) => {
                     id={message?.id}
                 />
             ))}
+            {!rtMessages && <h2>Nie ma jeszcze żadnych wiadomości.</h2>}
             <MessageForm roomId={id} />
         </Box>
     );

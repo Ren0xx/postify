@@ -59,5 +59,27 @@ export const roomRouter = createTRPCRouter({
     }),
     removeOne: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input }) => {
         return ctx.prisma.room.delete({ where: { id: input.id } });
-    })
+    }),
+    getTopRooms: protectedProcedure
+        .input(z.object({ count: z.number() }))
+        .query(async ({ ctx, input }) => {
+            const rooms = await ctx.prisma.room.findMany({
+                where: {
+                    isPublic: true,
+                },
+                take: input.count,
+                orderBy: [
+                    {
+                        allowedUsers: {
+                            _count: "desc",
+                        },
+                    },
+                ],
+                include: {
+                    tags: true,
+                    allowedUsers: true,
+                },
+            });
+            return rooms;
+        }),
 });
