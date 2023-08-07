@@ -1,6 +1,6 @@
 import supabase from "@/utils/db/supabase";
-import { Box, Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useEffect, useState, useRef } from "react";
 import MessageCard from "@/components/ChatRoom/MessageCard";
 import { type RouterOutputs } from "@/utils/api";
 import MessageForm from "@/components/ChatRoom/MessageForm";
@@ -15,6 +15,8 @@ type RoomChatProps = {
 const RoomChat = (props: RoomChatProps) => {
     const { name, messages, id, userName, userImage } = props;
     const [rtMessages, setMessages] = useState<Message[]>(messages);
+
+    //TODO Move uE and uS to diffrent hook
 
     useEffect(() => {
         const channel = supabase
@@ -35,12 +37,12 @@ const RoomChat = (props: RoomChatProps) => {
                                     message && message.id !== payload.old.id
                             )
                         );
-                        console.log(rtMessages);
                     } else if (payload.eventType === "INSERT") {
                         setMessages((prevMessages) => [
                             ...prevMessages,
                             payload.new as Message,
                         ]);
+                        scrollToBottom();
                     }
                 }
             )
@@ -49,22 +51,36 @@ const RoomChat = (props: RoomChatProps) => {
             void supabase.removeChannel(channel);
         };
     }, [rtMessages, id]);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToBottom = () => {
+        console.log(messagesEndRef);
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({
+                behavior: "smooth",
+                block: "end",
+            });
+        }
+    };
     return (
-        <Box>
-            {rtMessages?.map((message: Message) => (
-                <MessageCard
-                    key={message?.id}
-                    content={message?.content ?? ""}
-                    updatedAt={message?.updatedAt}
-                    image={message?.creator?.image ?? userImage}
-                    name={message?.creator?.name ?? userName}
-                    creatorId={message?.creator?.id}
-                    id={message?.id}
-                />
-            ))}
-            {!rtMessages && <h2>Nie ma jeszcze żadnych wiadomości.</h2>}
+        <>
+            <Box sx={{ maxHeight: "500px", overflowY: "scroll" }}>
+                {rtMessages?.map((message: Message) => (
+                    <MessageCard
+                        key={message?.id}
+                        content={message?.content ?? ""}
+                        updatedAt={message?.updatedAt}
+                        image={message?.creator?.image ?? userImage}
+                        name={message?.creator?.name ?? userName}
+                        creatorId={message?.creator?.id}
+                        id={message?.id}
+                    />
+                ))}
+                {!rtMessages && <h2>Nie ma jeszcze żadnych wiadomości.</h2>}
+                <div ref={messagesEndRef} />
+            </Box>
             <MessageForm roomId={id} />
-        </Box>
+        </>
     );
 };
 

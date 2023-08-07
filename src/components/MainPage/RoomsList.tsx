@@ -5,9 +5,6 @@ import { api, type RouterOutputs } from "@/utils/api";
 import Link from "next/link";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 const RoomsList = () => {
-    //mock
-    const b = new Array(5);
-    b.fill(0);
     const numberOfRooms = 5;
     const {
         data: rooms,
