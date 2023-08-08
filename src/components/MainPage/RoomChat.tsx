@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import MessageCard from "@/components/ChatRoom/MessageCard";
 import { type RouterOutputs } from "@/utils/api";
 import MessageForm from "@/components/ChatRoom/MessageForm";
+import useRealTimeMessages from "@/hooks/useRealtimeMessages";
 type Message = RouterOutputs["message"]["getOne"];
 type RoomChatProps = {
     name: string;
@@ -14,54 +15,8 @@ type RoomChatProps = {
 };
 const RoomChat = (props: RoomChatProps) => {
     const { name, messages, id, userName, userImage } = props;
-    const [rtMessages, setMessages] = useState<Message[]>(messages);
+    const { rtMessages, messagesEndRef } = useRealTimeMessages(id, messages);
 
-    //TODO Move uE and uS to diffrent hook
-
-    useEffect(() => {
-        const channel = supabase
-            .channel(`room_messages_${id}`)
-            .on(
-                "postgres_changes",
-                {
-                    event: "*",
-                    schema: "public",
-                    table: "Message",
-                    filter: `roomId=eq.${id}`,
-                },
-                (payload) => {
-                    if (payload.eventType === "DELETE") {
-                        setMessages((prevMessages) =>
-                            prevMessages.filter(
-                                (message) =>
-                                    message && message.id !== payload.old.id
-                            )
-                        );
-                    } else if (payload.eventType === "INSERT") {
-                        setMessages((prevMessages) => [
-                            ...prevMessages,
-                            payload.new as Message,
-                        ]);
-                        scrollToBottom();
-                    }
-                }
-            )
-            .subscribe();
-        return () => {
-            void supabase.removeChannel(channel);
-        };
-    }, [rtMessages, id]);
-    const messagesEndRef = useRef<HTMLDivElement | null>(null);
-
-    const scrollToBottom = () => {
-        console.log(messagesEndRef);
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({
-                behavior: "smooth",
-                block: "end",
-            });
-        }
-    };
     return (
         <>
             <Box sx={{ maxHeight: "500px", overflowY: "scroll" }}>
