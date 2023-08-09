@@ -11,7 +11,7 @@ const Homepage = () => {
                 zainteresują!
             </Typography>
             <hr />
-            <Grid container spacing={2} sx={{ minHeight: "80vh" }}>
+            <Grid container spacing={2} sx={{ minHeight: "80vh", my: 1 }}>
                 <Grid item xs={1} md={3}>
                     <RoomsList />
                 </Grid>

@@ -14,7 +14,7 @@ type RoomCardProps = {
 export default function RoomCard(props: RoomCardProps) {
     const { name, id, tags } = props.room;
     return (
-        <Card  elevation={2}>
+        <Card elevation={2} sx={{ my: 1 }}>
             <CardContent>
                 <Typography variant='h4' color='text.secondary' gutterBottom>
                     Pokój: {name}
