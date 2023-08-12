@@ -36,7 +36,7 @@ const Header = () => {
                                     sessionData?.user.image ?? "Profile picture"
                                 }
                                 component={Link}
-                                href={`/profile/${sessionData?.user.id}`}
+                                href={`/users/${sessionData?.user.id}`}
                             />
                             <Typography
                                 component={Link}
@@ -46,7 +46,7 @@ const Header = () => {
                                         textUnderlineOffset: "0.3em",
                                     },
                                 }}
-                                href={`/profile/${sessionData?.user.id}`}>
+                                href={`/users/${sessionData?.user.id}`}>
                                 {sessionData?.user.name ?? "Anonymous"}
                             </Typography>
                             <Tooltip title='Logout'>

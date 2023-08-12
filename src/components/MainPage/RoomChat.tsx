@@ -19,7 +19,10 @@ const RoomChat = (props: RoomChatProps) => {
 
     return (
         <>
-            <Box sx={{ maxHeight: "500px", overflowY: "scroll" }}>
+            <Box
+                component='div'
+                sx={{ maxHeight: "500px", overflowY: "scroll" }}
+                ref={messagesEndRef}>
                 {rtMessages?.map((message: Message) => (
                     <MessageCard
                         key={message?.id}
@@ -32,7 +35,6 @@ const RoomChat = (props: RoomChatProps) => {
                     />
                 ))}
                 {!rtMessages && <h2>Nie ma jeszcze żadnych wiadomości.</h2>}
-                <div ref={messagesEndRef} />
             </Box>
             <MessageForm roomId={id} />
         </>

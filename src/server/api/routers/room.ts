@@ -82,4 +82,17 @@ export const roomRouter = createTRPCRouter({
             });
             return rooms;
         }),
+    getRoomsPaginated: protectedProcedure
+        .input(z.object({ page: z.number().gte(1) }))
+        .query(async ({ ctx, input }) => {
+            const rooms = await ctx.prisma.room.findMany({
+                skip: (input.page - 1) * 10,
+                take: 10,
+                include: {
+                    tags: true,
+                },
+            });
+            return rooms;
+        }),
+
 });

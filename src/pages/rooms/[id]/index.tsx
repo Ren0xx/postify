@@ -49,7 +49,7 @@ export default function Room() {
         return (
             <>
                 <Head>
-                    <title>The error occured</title>
+                    <title>Wystąpił błąd</title>
                 </Head>
                 <RoomNotFound />
             </>

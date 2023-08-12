@@ -1,7 +1,7 @@
 import { Avatar, Box, Stack, Grid, IconButton, Link } from "@mui/material";
 import slugify from "slugify";
 import { useRef } from "react";
-import { formatted } from "@/utils/dates/helperFuncs";
+import { formattedToLocale } from "@/utils/dates/helperFuncs";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useSession } from "next-auth/react";
 import { api } from "@/utils/api";
@@ -87,7 +87,7 @@ const MessageCard = (props: MessageProps) => {
                                 href={`/users/${slugify(name ?? "not-found")}`}>
                                 <strong>{name}</strong>
                             </Link>
-                            <p>{formatted(updatedAt || new Date())}</p>
+                            <p>{formattedToLocale(updatedAt || new Date())}</p>
                         </Box>
                         <Box>
                             <p>{content}</p>

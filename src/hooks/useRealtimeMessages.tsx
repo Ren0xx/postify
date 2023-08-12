@@ -8,12 +8,8 @@ const useRealTimeMessages = (roomId: string, messages: Message[]) => {
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     const scrollToBottom = () => {
-        if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({
-                behavior: "smooth",
-                block: "end",
-            });
-        }
+        const lastChildElement = messagesEndRef.current?.lastElementChild;
+        lastChildElement?.scrollIntoView({ behavior: "smooth", block: "end" });
     };
     useEffect(() => {
         const channel = supabase
