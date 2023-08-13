@@ -62,6 +62,8 @@ model Tag {
   id    String @id @default(cuid())
   name  String 
   rooms Room[] @relation("RoomToTag")
+  
+  @@index([name])
 }
 
 model Room {
@@ -74,6 +76,8 @@ model Room {
   owner        User?     @relation(fields: [ownerId], references: [id])
   allowedUsers User[]    @relation("RoomAllowedUsers")
   tags         Tag[]     @relation("RoomToTag")
+  
+  @@index([name])
 }
 
 model Message {

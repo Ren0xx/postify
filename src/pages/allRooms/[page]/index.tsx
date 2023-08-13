@@ -1,29 +1,20 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import Loading from "@/components/utils/Loading";
-import Head from "next/head";
-import RoomsList from "@/components/Rooms/RoomsList";
-import { api, type RouterOutputs } from "@/utils/api";
 import useIsLogged from "@/hooks/useIsLogged";
-type Room = RouterOutputs["room"]["getRoomsPaginated"][0];
+import RoomsList from "@/components/Rooms/RoomsList";
+import { api } from "@/utils/api";
 
+import Head from "next/head";
+import { useRouter } from "next/router";
 export default function Rooms() {
     const isLogged = useIsLogged();
-
     const router = useRouter();
-    const page = router.query.page as string;
-    const numberOfPage = Number(page);
-    useEffect(() => {
-        if (Number.isNaN(numberOfPage) || numberOfPage < 1) {
-            void router.push("/allRooms/1");
-        }
-    }, [numberOfPage, router]);
-    const {
-        data: rooms,
-        isLoading,
-        isError,
-    } = api.room.getRoomsPaginated.useQuery(
-        { page: numberOfPage },
+
+    const currentPage =
+        router.query.page && !isNaN(parseInt(router.query.page as string))
+            ? parseInt(router.query.page as string)
+            : 1;
+    const { data, isLoading, isError } = api.room.getRoomsPaginated.useQuery(
+        { page: currentPage },
         { enabled: isLogged === true }
     );
     if (isLoading) {
@@ -47,9 +38,10 @@ export default function Rooms() {
         );
     }
     return (
-        <>
-            <h2>Lista pokoi:</h2>
-            <RoomsList rooms={rooms} />
-        </>
+        <RoomsList
+            rooms={data.rooms}
+            pagesCount={data.totalPages}
+            currentPage={currentPage}
+        />
     );
 }

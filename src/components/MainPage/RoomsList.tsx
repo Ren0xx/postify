@@ -28,6 +28,7 @@ const RoomsList = () => {
                 {isLoading && <h4>Wczytywanie...</h4>}
                 {isError && <h4>Coś poszło nie tak...</h4>}
             </section>
+            <Link href='/allRooms/1'>Wszystkie pokoje</Link>
         </>
     );
 };

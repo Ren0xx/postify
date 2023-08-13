@@ -77,7 +77,6 @@ export const roomRouter = createTRPCRouter({
                 ],
                 include: {
                     tags: true,
-                    allowedUsers: true,
                 },
             });
             return rooms;
@@ -85,14 +84,22 @@ export const roomRouter = createTRPCRouter({
     getRoomsPaginated: protectedProcedure
         .input(z.object({ page: z.number().gte(1) }))
         .query(async ({ ctx, input }) => {
+            const perPage = 10; 
+            const offset = (input.page - 1) * perPage;
+
+            const totalRooms = await ctx.prisma.room.count(); 
+
             const rooms = await ctx.prisma.room.findMany({
-                skip: (input.page - 1) * 10,
-                take: 10,
+                skip: offset,
+                take: perPage,
                 include: {
                     tags: true,
                 },
             });
-            return rooms;
+
+            const totalPages = Math.ceil(totalRooms / perPage);
+
+            return { rooms, totalPages };
         }),
 
 });
