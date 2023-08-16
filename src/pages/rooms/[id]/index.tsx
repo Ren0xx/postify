@@ -33,6 +33,7 @@ export default function Room() {
         },
     });
     const deleteTag = (id: string) => {
+        if (!isOwner) return;
         void deleteOne.mutateAsync({ id });
     };
     if (isLoading) {
@@ -59,10 +60,9 @@ export default function Room() {
         (user) => user.id === sessionData?.user.id
     );
     const isOwner = room?.ownerId === sessionData?.user.id;
-    if (!isUserAllowed && !isOwner && !isError) {
+    if (!isUserAllowed && !isOwner && !isError && !room.isPublic) {
         return <NotAuthorized password={room.password} roomId={room.id} />;
     }
-
     return (
         <>
             <Head>
@@ -71,7 +71,11 @@ export default function Room() {
                 </title>
             </Head>
             <InfoSection name={room.name} />
-            <TagsSection tags={room.tags as Tag[]} deleteTag={deleteTag} />
+            <TagsSection
+                tags={room.tags as Tag[]}
+                deleteTag={deleteTag}
+                canDelete={isOwner}
+            />
             {isOwner && (
                 <AdminSection
                     roomId={room.id}

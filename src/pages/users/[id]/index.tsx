@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { api, type RouterOutputs } from "@/utils/api";
+import Info from "@/components/UserPage/Info";
 import Head from "next/head";
 type User = RouterOutputs["user"]["getOne"];
 import Loading from "@/components/utils/Loading";
@@ -41,10 +42,12 @@ export default function UserProfile() {
     }
     return (
         <div>
-            <h2>Użytkownik: {user?.name}</h2>
-            <p>Właściciel {user?.roomsOwned.length} pokoi.</p>
-
-            <p> Etc</p>
+            <Info
+                profilePicture={user.image}
+                userName={user.name}
+                description={user.description}
+                roomsOwnedCount={user.roomsOwned.length}
+            />
         </div>
     );
 }

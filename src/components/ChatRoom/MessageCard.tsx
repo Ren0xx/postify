@@ -1,4 +1,13 @@
-import { Avatar, Box, Stack, Grid, IconButton, Link } from "@mui/material";
+import {
+    Avatar,
+    Box,
+    Stack,
+    Grid,
+    IconButton,
+    Link,
+    useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import slugify from "slugify";
 import { useRef } from "react";
 import { formattedToLocale } from "@/utils/dates/helperFuncs";
@@ -18,6 +27,8 @@ const MessageCard = (props: MessageProps) => {
     const { content, updatedAt, image, name, id, creatorId } = props;
     const deleteButtonRef = useRef<HTMLButtonElement>(null);
     const deleteOne = api.message.deleteOne.useMutation();
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
     const handleDelete = () => {
         if (!isAuthor) return;
@@ -47,26 +58,29 @@ const MessageCard = (props: MessageProps) => {
                     deleteButtonRef.current.style.opacity = "0";
                 }
             }}>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} sx={{ m: 2 }}>
+                {!isSmallScreen && ( 
+                    <Grid
+                        item
+                        xs={1}
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1,
+                        }}>
+                        <Avatar
+                            component={Link}
+                            href={`/users/${slugify(name ?? "not-found")}`}
+                            src={image ?? ""}
+                            alt='Not found'
+                            sx={{ mt: 2, p: 0, alignSelf: "flex-start" }}
+                        />
+                    </Grid>
+                )}
                 <Grid
                     item
-                    xs={1}
-                    sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5em",
-                    }}>
-                    <Avatar
-                        component={Link}
-                        href={`/users/${slugify(name ?? "not-found")}`}
-                        src={image ?? ""}
-                        alt='Not found'
-                        sx={{ mt: 2, p: 0, alignSelf: "flex-start" }}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    xs={11}
+                    xs={12}
+                    md={11}
                     sx={{
                         "&:hover": {
                             backgroundColor: "#dfdfdf",
@@ -89,9 +103,7 @@ const MessageCard = (props: MessageProps) => {
                             </Link>
                             <p>{formattedToLocale(updatedAt || new Date())}</p>
                         </Box>
-                        <Box>
-                            <p>{content}</p>
-                        </Box>
+                        <p>{content}</p>
                     </Stack>
                     {isAuthor ? (
                         <IconButton

@@ -15,4 +15,28 @@ export const userRouter = createTRPCRouter({
             }
         });
     }),
+    addFriend: protectedProcedure.input(z.object({ id: z.string() })).mutation(({ ctx, input }) => {
+        return ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: {
+                friends: {
+                    connect: {
+                        id: input.id
+                    },
+                },
+            },
+        });
+    }),
+    removeFriend: protectedProcedure.input(z.object({ id: z.string() })).mutation(({ ctx, input }) => {
+        return ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: {
+                friends: {
+                    disconnect: {
+                        id: input.id
+                    },
+                },
+            },
+        });
+    }),
 });

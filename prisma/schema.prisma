@@ -77,7 +77,6 @@ model Room {
   allowedUsers User[]    @relation("RoomAllowedUsers")
   tags         Tag[]     @relation("RoomToTag")
   
-  @@index([name])
 }
 
 model Message {
