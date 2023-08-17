@@ -10,7 +10,7 @@ export const userRouter = createTRPCRouter({
             where: { id: input.id },
 
             include: {
-                friends: true,
+                User_A: true,
                 roomsOwned: true,
             }
         });
@@ -19,7 +19,7 @@ export const userRouter = createTRPCRouter({
         return ctx.prisma.user.update({
             where: { id: ctx.session.user.id },
             data: {
-                friends: {
+                User_A: {
                     connect: {
                         id: input.id
                     },
@@ -31,11 +31,11 @@ export const userRouter = createTRPCRouter({
         return ctx.prisma.user.update({
             where: { id: ctx.session.user.id },
             data: {
-                friends: {
+                User_A: {
                     disconnect: {
                         id: input.id
                     },
-                },
+                }
             },
         });
     }),

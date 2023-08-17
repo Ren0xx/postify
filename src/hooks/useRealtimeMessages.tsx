@@ -46,6 +46,9 @@ const useRealTimeMessages = (roomId: string, messages: Message[]) => {
         };
     }, [roomId]);
 
+    useEffect(() => {
+        scrollToBottom();
+    }, []);
     return { rtMessages, messagesEndRef };
 };
 

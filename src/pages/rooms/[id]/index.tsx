@@ -27,15 +27,15 @@ export default function Room() {
         { id: roomId },
         { enabled: sessionData?.user !== undefined }
     );
-    const deleteOne = api.tag.removeOne.useMutation({
-        onSuccess: () => {
-            void refetch();
-        },
-    });
-    const deleteTag = (id: string) => {
-        if (!isOwner) return;
-        void deleteOne.mutateAsync({ id });
-    };
+    // const deleteOne = api.tag.removeOne.useMutation({
+    //     onSuccess: () => {
+    //         void refetch();
+    //     },
+    // });
+    // const deleteTag = (id: string) => {
+    //     if (!isOwner) return;
+    //     void deleteOne.mutateAsync({ id });
+    // };
     if (isLoading) {
         return (
             <>
@@ -73,7 +73,7 @@ export default function Room() {
             <InfoSection name={room.name} />
             <TagsSection
                 tags={room.tags as Tag[]}
-                deleteTag={deleteTag}
+                deleteTag={() => ({})}
                 canDelete={isOwner}
             />
             {isOwner && (
@@ -87,9 +87,6 @@ export default function Room() {
             <RoomChat
                 id={room.id}
                 messages={room.messages as Message[]}
-                name={room.name}
-                userName={sessionData?.user.name}
-                userImage={sessionData?.user.image}
             />
         </>
     );

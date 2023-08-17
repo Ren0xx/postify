@@ -42,7 +42,6 @@ model User {
   description   String    @default("No description yet")
   image         String?
   accounts      Account[]
-  Messages      Message[]
   roomsOwned    Room[]
   sessions      Session[]
   allowedRooms  Room[]    @relation("RoomAllowedUsers")
@@ -59,11 +58,11 @@ model VerificationToken {
 }
 
 model Tag {
-  id    String @id @default(cuid())
-  name  String 
-  rooms Room[] @relation("RoomToTag")
-  
-  @@index([name])
+  id    String      @id @unique @default(cuid())
+  name  TagCategory @default(INNE)
+  rooms Room[]      @relation("RoomToTag")
+
+  @@unique([name])
 }
 
 model Room {
@@ -76,16 +75,25 @@ model Room {
   owner        User?     @relation(fields: [ownerId], references: [id])
   allowedUsers User[]    @relation("RoomAllowedUsers")
   tags         Tag[]     @relation("RoomToTag")
-  
 }
 
 model Message {
-  id        String   @id @default(cuid())
-  content   String
-  roomId    String
-  createdAt DateTime @db.Timestamptz(6)
-  updatedAt DateTime @updatedAt @db.Timestamptz(6)
-  creatorId String
-  creator   User     @relation(fields: [creatorId], references: [id])
-  room      Room     @relation(fields: [roomId], references: [id])
+  id           String   @id @default(cuid())
+  content      String
+  roomId       String
+  createdAt    DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @db.Timestamptz(6)
+  creatorImage String?
+  creatorName  String?
+  creatorId    String
+  room         Room     @relation(fields: [roomId], references: [id])
+}
+
+enum TagCategory {
+  PROGRAMOWANIE
+  GRY
+  NAUKA
+  TECHNOLOGIA
+  FILMY
+  INNE
 }

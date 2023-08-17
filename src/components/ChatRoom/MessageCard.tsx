@@ -59,7 +59,7 @@ const MessageCard = (props: MessageProps) => {
                 }
             }}>
             <Grid container spacing={1} sx={{ m: 2 }}>
-                {!isSmallScreen && ( 
+                {!isSmallScreen && (
                     <Grid
                         item
                         xs={1}
