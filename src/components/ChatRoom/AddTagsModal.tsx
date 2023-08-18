@@ -1,42 +1,52 @@
 import {
     Box,
     Chip,
-    TextField,
     Button,
     Dialog,
     DialogActions,
     DialogTitle,
     DialogContent,
-    Typography,
 } from "@mui/material";
-import { api, type RouterOutputs } from "@/utils/api";
+import { useMemo } from "react";
+import { type RouterOutputs } from "@/utils/api";
+import LoadingButton from "@mui/lab/LoadingButton";
 import useAddTag from "@/hooks/useAddTag";
 import { useState } from "react";
-type Tag = RouterOutputs["tag"]["createOne"];
+type Tag = RouterOutputs["tag"]["getOne"];
 type TagProps = {
     tags: Tag[];
     roomId: string;
     refetch: () => void;
 };
 const AddTagsModal = (props: TagProps) => {
-    const { open, handleClose, handleOpen, createOne } = useAddTag();
+    const { open, handleClose, handleOpen, addMany, allTags } = useAddTag();
     const { tags, roomId, refetch } = props;
+    const [selectedTags, setSelectedTags] = useState(tags);
 
-    const [tagName, setName] = useState<string>("");
-    const [err, setErr] = useState<boolean>(false);
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setErr(false);
-        setName(e.target.value);
-    };
-    const createTag = async () => {
-        const tagData = await createOne.mutateAsync({ name: tagName, roomId });
-        if (tagData === null) {
-            setErr(true);
-            setName("");
-            return;
+    const handleTagSelect = (tag: Tag) => {
+        if (selectedTags.some((t) => t?.id === tag?.id)) {
+            setSelectedTags((prevSelected) =>
+                prevSelected.filter((t) => t?.id !== tag?.id)
+            );
+        } else {
+            setSelectedTags((prevSelected) => [...prevSelected, tag]);
         }
+    };
+    const tagsNotConnected = useMemo(() => {
+        if (!allTags) {
+            return [];
+        }
+        return allTags.filter((tag) => !tags.some((t) => t?.id === tag.id));
+    }, [allTags, tags]);
+
+    const addTags = async () => {
+        if (selectedTags.length === 0) return;
+        const tagIds = selectedTags.map((tag) => tag?.id.toString() ?? "");
+        await addMany.mutateAsync({ roomId, tagIds });
+
         refetch();
-        setName("");
+        setSelectedTags([]);
+        handleClose();
     };
     return (
         <>
@@ -47,39 +57,33 @@ const AddTagsModal = (props: TagProps) => {
                 <DialogTitle>Dodaj tagi</DialogTitle>
                 <DialogContent>
                     <Box component='ul' sx={{ display: "flex", gap: 2 }}>
-                        {tags.map((tag: Tag) => (
+                        {tagsNotConnected.map((tag: Tag) => (
                             <Chip
                                 key={tag?.id}
                                 label={tag?.name ?? "Unknown"}
                                 component='li'
-                                color='secondary'
+                                color={
+                                    selectedTags.some((t) => t?.id === tag?.id)
+                                        ? "primary"
+                                        : "secondary"
+                                }
+                                onClick={() => handleTagSelect(tag)}
+                                clickable
                             />
                         ))}
                     </Box>
-                    <TextField
-                        label='Dodaj tag'
-                        onChange={handleChange}
-                        value={tagName}
-                    />
                 </DialogContent>
                 <DialogActions
                     sx={{ display: "flex", flexDirection: "column", mt: 2 }}>
-                    <Button
+                    <LoadingButton
+                        sx={{ px: 6, my: 1 }}
                         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                        onClick={createTag}
-                        disabled={createOne.isLoading || err}>
-                        Dodaj tag
-                    </Button>
-                    <Box sx={{ my: 4 }}>
-                        {createOne.isLoading && (
-                            <Typography color='info'>Wczytywanie...</Typography>
-                        )}
-                        {err && (
-                            <Typography color='error'>
-                                Tag już istnieje
-                            </Typography>
-                        )}
-                    </Box>
+                        onClick={addTags}
+                        loading={addMany.isLoading}
+                        loadingIndicator='Wczytywanie…'
+                        variant='outlined'>
+                        Dodaj
+                    </LoadingButton>
                 </DialogActions>
             </Dialog>
         </>

@@ -1,4 +1,3 @@
-import { Box, Grid } from "@mui/material";
 import { api, type RouterOutputs } from "@/utils/api";
 import Head from "next/head";
 import RoomChat from "@/components/MainPage/RoomChat";
@@ -27,15 +26,15 @@ export default function Room() {
         { id: roomId },
         { enabled: sessionData?.user !== undefined }
     );
-    // const deleteOne = api.tag.removeOne.useMutation({
-    //     onSuccess: () => {
-    //         void refetch();
-    //     },
-    // });
-    // const deleteTag = (id: string) => {
-    //     if (!isOwner) return;
-    //     void deleteOne.mutateAsync({ id });
-    // };
+    const deleteOne = api.tag.removeOne.useMutation({
+        onSuccess: () => {
+            void refetch();
+        },
+    });
+    const deleteTag = (tagId: string) => {
+        if (!isOwner) return;
+        void deleteOne.mutateAsync({ tagId, roomId });
+    };
     if (isLoading) {
         return (
             <>
@@ -73,7 +72,7 @@ export default function Room() {
             <InfoSection name={room.name} />
             <TagsSection
                 tags={room.tags as Tag[]}
-                deleteTag={() => ({})}
+                deleteTag={deleteTag}
                 canDelete={isOwner}
             />
             {isOwner && (
@@ -84,10 +83,7 @@ export default function Room() {
                     refetch={refetch}
                 />
             )}
-            <RoomChat
-                id={room.id}
-                messages={room.messages as Message[]}
-            />
+            <RoomChat id={room.id} messages={room.messages as Message[]} />
         </>
     );
 }

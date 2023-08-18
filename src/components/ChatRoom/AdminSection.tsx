@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import DeleteRoomModal from "@/components/ChatRoom/DeleteRoomModal";
 import AddTagsModal from "@/components/ChatRoom/AddTagsModal";
 import { type RouterOutputs } from "@/utils/api";
-type Tag = RouterOutputs["tag"]["createOne"];
+type Tag = RouterOutputs["tag"]["getOne"];
 type AdminProps = {
     roomId: string;
     tags: Tag[];

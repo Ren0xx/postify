@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { api } from "@/utils/api";
 import { useRouter } from "next/navigation";
+import TagCategories from "@/utils/db/tagCategories";
+import { number, object } from "zod";
 const useCreateRoom = () => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>(false);
@@ -33,12 +35,22 @@ const useCreateRoom = () => {
                     .min(4, "Hasło musi być dłuższe niż 4 znaki.")
                     .max(20, "Hasło nie może być dłuższe niż 20 znaków."),
         }),
+        tags: yup
+            .array(
+                yup.object().shape({
+                    id: yup.number().required(),
+                    label: yup.string().required(),
+                })
+            )
+            .required()
+            .min(1, "Wybierz chociaż 1 tag."),
     });
     const formik = useFormik({
         initialValues: {
             name: "",
             isPrivate: false,
             password: "",
+            tags: [],
         },
         validationSchema: validationSchema,
         onSubmit: async (values, { resetForm }) => {
@@ -48,30 +60,40 @@ const useCreateRoom = () => {
                 handleClickOpen();
                 return;
             }
+            const tagsIds = values.tags.map((tag: { id: number }) =>
+                tag.id.toString()
+            );
             if (values.isPrivate) {
-                const roomPriv = await createPrivateRoom.mutateAsync({
+                const room = await createRoom.mutateAsync({
                     name: values.name,
                     isPublic: !values.isPrivate,
                     password: values.password,
+                    tagsIds: tagsIds,
                 });
-                router.push(`/rooms/${roomPriv.id}`);
+                router.push(`/rooms/${room.id}`);
                 return;
             }
-            const roomPub = await createPublicRoom.mutateAsync({
+            const room = await createRoom.mutateAsync({
                 name: values.name,
+                tagsIds: tagsIds,
             });
             resetForm();
-            router.push(`/rooms/${roomPub.id}`);
+            router.push(`/rooms/${room.id}`);
         },
     });
-    const createPrivateRoom = api.room.createPrivate.useMutation({});
-    const createPublicRoom = api.room.createPublic.useMutation({});
+    const createRoom = api.room.createRoom.useMutation({});
     const { isRefetching, refetch } = api.room.nameAlreadyTaken.useQuery(
         { name: formik.values.name },
         {
             enabled: false,
         }
     );
+    const handleTagsChange = (
+        event: React.ChangeEvent<object>,
+        newValue: { id: number; label: string }[]
+    ) => {
+        void formik.setFieldValue("tags", newValue);
+    };
     return {
         open,
         isRefetching,
@@ -80,6 +102,8 @@ const useCreateRoom = () => {
         handleClickOpen,
         formik,
         setAlreadyTaken,
+        TagCategories,
+        handleTagsChange,
     };
 };
 

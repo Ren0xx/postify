@@ -5,33 +5,57 @@ import {
 } from "@/server/api/trpc";
 
 export const roomRouter = createTRPCRouter({
-    createPublic: protectedProcedure
-        .input(z.object({ name: z.string() }))
+    // createPublic: protectedProcedure
+    //     .input(z.object({ name: z.string() }))
+    //     .mutation(async ({ ctx, input }) => {
+    //         return ctx.prisma.room.create({
+    //             data: {
+    //                 name: input.name,
+    //                 ownerId: ctx.session.user.id,
+    //             },
+    //         });
+    //     }),
+    // createPrivate: protectedProcedure
+    //     .input(
+    //         z.object({
+    //             name: z.string(),
+    //             password: z.string(),
+    //             isPublic: z.boolean(),
+    //         })
+    //     )
+    //     .mutation(async ({ ctx, input }) => {
+
+    //         return ctx.prisma.room.create({
+    //             data: {
+    //                 name: input.name,
+    //                 ownerId: ctx.session.user.id,
+    //             },
+    //         });
+
+    //     }),
+    createRoom: protectedProcedure
+        .input(z.object({
+            name: z.string(),
+            password: z.string().optional(),
+            isPublic: z.boolean().optional(),
+            tagsIds: z.array(z.string())
+        }))
         .mutation(async ({ ctx, input }) => {
-            return ctx.prisma.room.create({
+            const { name, password, isPublic, tagsIds } = input;
+
+            const room = await ctx.prisma.room.create({
                 data: {
-                    name: input.name,
+                    name,
                     ownerId: ctx.session.user.id,
+                    password: password || null,
+                    isPublic: isPublic || false,
+                    tags: {
+                        connect: tagsIds.map(id => ({ id: id }))
+                    }
                 },
             });
-        }),
-    createPrivate: protectedProcedure
-        .input(
-            z.object({
-                name: z.string(),
-                password: z.string(),
-                isPublic: z.boolean(),
-            })
-        )
-        .mutation(async ({ ctx, input }) => {
 
-            return ctx.prisma.room.create({
-                data: {
-                    name: input.name,
-                    ownerId: ctx.session.user.id,
-                },
-            });
-
+            return room;
         }),
     nameAlreadyTaken: protectedProcedure
         .input(

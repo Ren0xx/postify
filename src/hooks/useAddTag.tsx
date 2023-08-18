@@ -9,13 +9,15 @@ const useAddTag = () => {
         setOpen(true);
     };
 
-    const createOne = api.tag.createOne.useMutation({});
+    const addMany = api.tag.addMany.useMutation({});
+    const { data: allTags } = api.tag.getAll.useQuery(undefined, {});
 
     return {
+        allTags,
         open,
         handleClose,
         handleOpen,
-        createOne,
+        addMany,
     };
 };
 

@@ -1,4 +1,5 @@
 import {
+    Autocomplete,
     Button,
     Dialog,
     DialogTitle,
@@ -9,6 +10,7 @@ import {
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 import useCreateRoom from "@/hooks/useCreateRoom";
 import ErrorSnackbar from "@/components/MainPage/RoomExistsSnackbar";
+
 const CreateRoomForm = () => {
     const {
         open,
@@ -17,7 +19,10 @@ const CreateRoomForm = () => {
         formik,
         isRefetching,
         nameTaken,
+        TagCategories,
+        handleTagsChange,
     } = useCreateRoom();
+
     return (
         <>
             <Button
@@ -85,6 +90,29 @@ const CreateRoomForm = () => {
                                 formik.touched.password &&
                                 formik.errors.password
                             }
+                        />
+                        <Autocomplete
+                            multiple
+                            id='tags'
+                            options={TagCategories}
+                            value={formik.values.tags}
+                            onChange={handleTagsChange}
+                            getOptionLabel={(option) => option.label}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label='Tagi'
+                                    error={Boolean(
+                                        formik.touched.tags &&
+                                            formik.errors.tags
+                                    )}
+                                    fullWidth
+                                    helperText={
+                                        formik.touched.tags &&
+                                        formik.errors.tags
+                                    }
+                                />
+                            )}
                         />
                     </DialogContent>
                     <DialogActions>
