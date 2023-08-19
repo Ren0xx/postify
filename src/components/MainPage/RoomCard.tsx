@@ -3,21 +3,21 @@ import {
     CardContent,
     Typography,
     CardActions,
-    Button,
     Link,
 } from "@mui/material";
-import { api, type RouterOutputs } from "@/utils/api";
+import { type RouterOutputs } from "@/utils/api";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 type RoomCardProps = {
     room: Room;
 };
 export default function RoomCard(props: RoomCardProps) {
     const { name, id, tags } = props.room;
+    console.log(tags);
     return (
-        <Card elevation={2} sx={{ my: 1 }}>
+        <Card elevation={2} sx={{ my: 1, textTransform: "capitalize" }}>
             <CardContent>
-                <Typography variant='h4' color='text.secondary' gutterBottom>
-                    Pokój: {name}
+                <Typography variant='h5' color='text.secondary' gutterBottom>
+                    {name}
                 </Typography>
                 <Typography variant='h5' component='div'></Typography>
                 <Typography variant='body1'>

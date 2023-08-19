@@ -1,25 +1,22 @@
-import { TextField, Typography } from "@mui/material";
-import RoomCard from "./RoomCard";
-import RoomChat from "./RoomChat";
+import { Typography } from "@mui/material";
+import RoomCard from "@/components/MainPage/RoomCard";
 import { api, type RouterOutputs } from "@/utils/api";
 import Link from "next/link";
-import useDebounce from "@/hooks/useDebounce";
-import { useState, useMemo } from "react";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 const RoomsList = () => {
-    const numberOfRooms = 5;
+    const numberOfRooms = 3;
     const {
         data: rooms,
         isLoading,
         isError,
     } = api.room.getTopRooms.useQuery({
-        count: numberOfRooms,
+        numberOfRooms,
     });
 
     return (
         <>
-            <Typography variant='h3' sx={{ mb: 2 }}>
-                Popularne pokoje:
+            <Typography variant='h3' sx={{ mb: 2, fontSize: 28 }}>
+                Pokoje które mogą cię zainteresować:
             </Typography>
             <section>
                 {rooms?.map((room: Room) => (

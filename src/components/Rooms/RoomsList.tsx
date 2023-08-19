@@ -12,7 +12,7 @@ const RoomsList = (props: RoomsListProps) => {
     const { rooms, pagesCount, currentPage } = props;
     return (
         <div>
-            <h1>Lista dostępnych pokoi.</h1>
+            <h1>Przeszukaj pokoje.</h1>
             <div>
                 {rooms?.map((room: Room) => (
                     <RoomCard key={room.id} room={room} />

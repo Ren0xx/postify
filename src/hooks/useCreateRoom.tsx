@@ -11,10 +11,8 @@ const useCreateRoom = () => {
     const [nameTaken, setAlreadyTaken] = useState<boolean>(false);
 
     const handleClose = () => {
-        if (Object.keys(formik.errors).length === 0) {
-            setOpen(false);
-            setAlreadyTaken(false);
-        }
+        setOpen(false);
+        setAlreadyTaken(false);
     };
     const handleClickOpen = () => {
         setOpen(true);

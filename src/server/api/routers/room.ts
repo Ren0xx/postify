@@ -5,34 +5,6 @@ import {
 } from "@/server/api/trpc";
 
 export const roomRouter = createTRPCRouter({
-    // createPublic: protectedProcedure
-    //     .input(z.object({ name: z.string() }))
-    //     .mutation(async ({ ctx, input }) => {
-    //         return ctx.prisma.room.create({
-    //             data: {
-    //                 name: input.name,
-    //                 ownerId: ctx.session.user.id,
-    //             },
-    //         });
-    //     }),
-    // createPrivate: protectedProcedure
-    //     .input(
-    //         z.object({
-    //             name: z.string(),
-    //             password: z.string(),
-    //             isPublic: z.boolean(),
-    //         })
-    //     )
-    //     .mutation(async ({ ctx, input }) => {
-
-    //         return ctx.prisma.room.create({
-    //             data: {
-    //                 name: input.name,
-    //                 ownerId: ctx.session.user.id,
-    //             },
-    //         });
-
-    //     }),
     createRoom: protectedProcedure
         .input(z.object({
             name: z.string(),
@@ -85,45 +57,67 @@ export const roomRouter = createTRPCRouter({
         return ctx.prisma.room.delete({ where: { id: input.id } });
     }),
     getTopRooms: protectedProcedure
-        .input(z.object({ count: z.number() }))
+        .input(z.object({ numberOfRooms: z.number() }))
         .query(async ({ ctx, input }) => {
+
             const rooms = await ctx.prisma.room.findMany({
                 where: {
                     isPublic: true,
                 },
-                take: input.count,
-                orderBy: [
-                    {
-                        allowedUsers: {
-                            _count: "desc",
-                        },
-                    },
-                ],
+                take: input.numberOfRooms,
                 include: {
                     tags: true,
                 },
+                orderBy: {
+                    tags: {
+                        _count: "desc",
+                    }
+                },
             });
+
             return rooms;
         }),
     getRoomsPaginated: protectedProcedure
-        .input(z.object({ page: z.number().gte(1) }))
+        .input(z.object({ page: z.number().gte(1), tags: z.array(z.string()).optional() }))
         .query(async ({ ctx, input }) => {
+
             const perPage = 10;
             const offset = (input.page - 1) * perPage;
 
-            const totalRooms = await ctx.prisma.room.count();
+            let where = {};
+            if (input.tags && input.tags.length > 0) {
+                where = {
+                    tags: {
+                        some: {
+                            name: {
+                                in: input.tags,
+                            },
+                        },
+                    },
+                };
+            }
+
+            const totalRooms = await ctx.prisma.room.count({
+                where,
+            });
 
             const rooms = await ctx.prisma.room.findMany({
                 skip: offset,
                 take: perPage,
+                where,
                 include: {
                     tags: true,
                 },
+                orderBy: {
+                    tags: {
+                        _count: 'desc',
+
+                    }
+                }
             });
 
             const totalPages = Math.ceil(totalRooms / perPage);
 
             return { rooms, totalPages };
         }),
-
 });

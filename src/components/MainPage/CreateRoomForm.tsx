@@ -120,7 +120,10 @@ const CreateRoomForm = () => {
                             onClick={handleClose}
                             autoFocus
                             id='create-room'
-                            disabled={formik.values.name === "" || isRefetching}
+                            disabled={
+                                Object.keys(formik.errors).length !== 0 ||
+                                isRefetching
+                            }
                             type='submit'>
                             Utwórz
                         </Button>

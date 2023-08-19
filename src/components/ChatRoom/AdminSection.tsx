@@ -10,9 +10,7 @@ type AdminProps = {
 };
 const AdminSection = (props: AdminProps) => {
     return (
-        <Box
-            sx={{ display: "flex", gap: "0.5em", justifyContent: "flex-end" }}
-            component='ul'>
+        <Box sx={{ display: "flex", gap: "0.5em", justifyContent: "flex-end" }}>
             <AddTagsModal
                 roomId={props.roomId}
                 tags={props.tags}

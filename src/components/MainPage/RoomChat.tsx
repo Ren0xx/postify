@@ -36,7 +36,7 @@ const RoomChat = (props: RoomChatProps) => {
                         id={message?.id}
                     />
                 ))}
-                {!rtMessages && (
+                {!rtMessages || rtMessages.length === 0 && (
                     <h2 style={{ marginLeft: "auto", marginRight: "auto" }}>
                         Nie ma jeszcze żadnych wiadomości.
                     </h2>

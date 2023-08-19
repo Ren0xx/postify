@@ -15,7 +15,7 @@ const DeleteRoomModal = (props: ModalProps) => {
         void removeRoom(props.id);
     };
     return (
-        <div>
+        <>
             <Button onClick={handleOpen} variant='contained' color='error'>
                 Usuń pokój
             </Button>
@@ -38,7 +38,7 @@ const DeleteRoomModal = (props: ModalProps) => {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </>
     );
 };
 
