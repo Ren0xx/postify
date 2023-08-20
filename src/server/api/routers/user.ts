@@ -39,4 +39,11 @@ export const userRouter = createTRPCRouter({
             },
         });
     }),
+
+    getLoggedUserFriends: protectedProcedure.query(({ ctx }) => {
+        return ctx.prisma.user.findUnique({
+            where: { id: ctx.session.user.id },
+            select: { User_A: true }
+        });
+    }),
 });
