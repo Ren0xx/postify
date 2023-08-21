@@ -1,7 +1,5 @@
-import { Avatar, Box, Stack, Paper, Button } from "@mui/material";
-import { type RouterOutputs } from "@/utils/api";
+import { Avatar, Box, Stack, Button } from "@mui/material";
 import Link from "next/link";
-type Room = RouterOutputs["room"]["getOne"]
 type InfoProps = {
     userId: string;
     profilePicture: string | null;
