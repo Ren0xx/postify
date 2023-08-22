@@ -44,6 +44,7 @@ model User {
   accounts      Account[]
   roomsOwned    Room[]
   sessions      Session[]
+  Messages      Message[]
   allowedRooms  Room[]    @relation("RoomAllowedUsers")
   User_A        User[]    @relation("UserFriends")
   User_B        User[]    @relation("UserFriends")
@@ -86,6 +87,7 @@ model Message {
   creatorImage String?
   creatorName  String?
   creatorId    String
+  creator   User     @relation(fields: [creatorId], references: [id])
   room         Room     @relation(fields: [roomId], references: [id])
 }
 
