@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { api } from "@/utils/api";
 import Friends from "@/components/UserPage/Friends";
 import { useSession } from "next-auth/react";
+import Loading from "@/components/utils/Loading";
 const FriendsPage = () => {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -54,14 +55,7 @@ const FriendsLoader = () => {
             <Head>
                 <title>Wczytywanie...</title>
             </Head>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    mt: 10,
-                }}>
-                <CircularProgress color='inherit' />
-            </Box>
+            <Loading />
         </>
     );
 };

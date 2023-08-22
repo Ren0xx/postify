@@ -1,10 +1,14 @@
-import { Backdrop, CircularProgress } from "@mui/material";
-
+import { Box, CircularProgress } from "@mui/material";
 const Loading = () => {
     return (
-        <Backdrop open={true}>
-            <CircularProgress color='primary' />
-        </Backdrop>
+        <Box
+            sx={{
+                display: "flex",
+                justifyContent: "center",
+                mt: 10,
+            }}>
+            <CircularProgress color='inherit' />
+        </Box>
     );
 };
 

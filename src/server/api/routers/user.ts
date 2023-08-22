@@ -58,4 +58,10 @@ export const userRouter = createTRPCRouter({
 
         });
     }),
+    getUserRooms: protectedProcedure.input(z.object({ id: z.string() })).query(({ input, ctx }) => {
+        return ctx.prisma.user.findUnique({
+            where: { id: input.id },
+            select: { roomsOwned: { include: { tags: true } } }
+        });
+    }),
 });

@@ -3,6 +3,7 @@ import { useState } from "react";
 import useIsLogged from "@/hooks/useIsLogged";
 import RoomsList from "@/components/Rooms/RoomsList";
 import TagsFilter from "@/components/Rooms/TagsFilter";
+import Loading from "@/components/utils/Loading";
 import { api } from "@/utils/api";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -67,14 +68,7 @@ const RoomsLoader = () => {
             <Head>
                 <title>Wczytywanie...</title>
             </Head>
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    mt: 10,
-                }}>
-                <CircularProgress color='inherit' />
-            </Box>
+            <Loading />
         </>
     );
 };

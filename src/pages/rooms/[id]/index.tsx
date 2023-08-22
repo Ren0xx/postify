@@ -9,7 +9,7 @@ type Tag = RouterOutputs["tag"]["getOne"];
 import AdminSection from "@/components/ChatRoom/AdminSection";
 import TagsSection from "@/components/ChatRoom/TagsSection";
 import InfoSection from "@/components/ChatRoom/InfoSection";
-import Loading from "@/components/utils/Loading";
+import SiteLoading from "@/components/utils/SiteLoading";
 import RoomNotFound from "@/components/utils/RoomNotFound";
 import NotAuthorized from "@/components/utils/NotAuthorized";
 export default function Room() {
@@ -41,7 +41,7 @@ export default function Room() {
                 <Head>
                     <title>Wczytywanie...</title>
                 </Head>
-                <Loading />
+                <SiteLoading />
             </>
         );
     }

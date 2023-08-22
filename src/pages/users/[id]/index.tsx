@@ -4,7 +4,7 @@ import { api, type RouterOutputs } from "@/utils/api";
 import About from "@/components/UserPage/About";
 import Head from "next/head";
 type User = RouterOutputs["user"]["getOne"];
-import Loading from "@/components/utils/Loading";
+import SiteLoading from "@/components/utils/SiteLoading";
 import UserNotFound from "@/components/utils/UserNotFound";
 import { useSession } from "next-auth/react";
 import AddOrRemoveFriend from "@/components/UserPage/AddOrRemoveFriend";
@@ -64,7 +64,7 @@ export default function UserProfile() {
                 <Head>
                     <title>Wczytywanie...</title>
                 </Head>
-                <Loading />
+                <SiteLoading />
             </>
         );
     }
