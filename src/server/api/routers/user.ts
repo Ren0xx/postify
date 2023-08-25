@@ -64,4 +64,30 @@ export const userRouter = createTRPCRouter({
             select: { roomsOwned: { include: { tags: true } } }
         });
     }),
+    updateProfilePicture: protectedProcedure
+        .input(z.object({ urlPath: z.string() }))
+        .mutation(async ({ ctx, input }) => {
+            return ctx.prisma.user.update({
+                where: { id: ctx.session.user.id },
+                data: {
+                    image: input.urlPath
+                }
+            });
+
+        }),
+    getLoggedUserDescription: protectedProcedure.query(({ ctx }) => {
+        return ctx.prisma.user.findUnique({
+            where: { id: ctx.session.user.id },
+            select: { description: true }
+
+        });
+    }),
+    updateLoggedUserDescription: protectedProcedure.input(z.object({ description: z.string() })).mutation(async ({ ctx, input }) => {
+        return ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: {
+                description: input.description
+            }
+        });
+    }),
 });

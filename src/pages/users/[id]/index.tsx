@@ -89,6 +89,7 @@ export default function UserProfile() {
             />
             <About
                 userId={user.id}
+                isOwner={user.id === sessionData?.user.id}
                 profilePicture={user.image}
                 userName={user.name}
                 description={user.description}

@@ -2,14 +2,21 @@ import { Avatar, Box, Stack, Button } from "@mui/material";
 import Link from "next/link";
 type InfoProps = {
     userId: string;
+    isOwner: boolean;
     profilePicture: string | null;
     userName: string | null;
     description: string;
     roomsOwnedCount: number | null;
 };
 const About = (props: InfoProps) => {
-    const { userId, profilePicture, description, userName, roomsOwnedCount } =
-        props;
+    const {
+        userId,
+        isOwner,
+        profilePicture,
+        description,
+        userName,
+        roomsOwnedCount,
+    } = props;
     return (
         <Box
             component='section'
@@ -41,13 +48,15 @@ const About = (props: InfoProps) => {
                     sx={{ width: 300, mt: "4em !important" }}>
                     Znajomi
                 </Button>
-                <Button
-                    component={Link}
-                    href='/settings'
-                    variant='contained'
-                    sx={{ width: 300 }}>
-                    Ustawienia
-                </Button>
+                {isOwner ? (
+                    <Button
+                        component={Link}
+                        href='/settings'
+                        variant='contained'
+                        sx={{ width: 300 }}>
+                        Ustawienia
+                    </Button>
+                ) : null}
                 <Button
                     component={Link}
                     href={`/users/${userId}/roomsOwned`}

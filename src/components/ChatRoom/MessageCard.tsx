@@ -42,8 +42,6 @@ const MessageCard = (props: MessageProps) => {
         <Box
             sx={{
                 flexGrow: 1,
-                p: 0.2,
-                m: 0,
                 "&:hover": {
                     cursor: "pointer",
                 },
@@ -63,6 +61,7 @@ const MessageCard = (props: MessageProps) => {
                     <Grid
                         item
                         xs={1}
+                        md={0}
                         sx={{
                             display: "flex",
                             alignItems: "center",

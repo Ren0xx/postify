@@ -17,12 +17,12 @@ const RoomChat = (props: RoomChatProps) => {
                 component='ul'
                 sx={{
                     height: "500px",
-                    overflowY: "scroll",
+                    overflowY: "auto",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "stretch",
+                    alignItems: "space-between",
                     flexDirection: "column",
-                    padding: 1,
+                    py: 1,
                 }}
                 ref={messagesEndRef}>
                 {rtMessages?.map((message: Message) => (
@@ -31,12 +31,12 @@ const RoomChat = (props: RoomChatProps) => {
                         content={message?.content ?? ""}
                         updatedAt={message?.updatedAt}
                         image={
-                            message?.creator.image ??
+                            message?.creator?.image ??
                             message?.creatorImage ??
                             "No-image"
                         }
                         name={
-                            message?.creator.name ??
+                            message?.creator?.name ??
                             message?.creatorName ??
                             "No-name"
                         }

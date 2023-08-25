@@ -20,7 +20,7 @@ export const roomRouter = createTRPCRouter({
                     name,
                     ownerId: ctx.session.user.id,
                     password: password || null,
-                    isPublic: isPublic || false,
+                    isPublic: isPublic || true,
                     tags: {
                         connect: tagsIds.map(id => ({ id: id }))
                     }

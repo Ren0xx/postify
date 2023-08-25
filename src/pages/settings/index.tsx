@@ -1,8 +1,12 @@
-import { Box, Button, Typography, TextField } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
+import ProfilePicture from "@/components/UserPage/ProfilePicture";
+import Description from "@/components/Settings/Description";
 export default function Settings() {
     const { data: sessionData } = useSession();
+    const [profPictureWidth, profPictureHeight] = [50, 50];
+
     return (
         <>
             <Head>
@@ -16,13 +20,15 @@ export default function Settings() {
                     justifyContent: "center",
                     alignItems: "center",
                     flexDirection: "column",
-                    gap: "2em",
-                    marginTop: "1.5em",
+                    gap: 2,
+                    mt: 1,
                 }}>
-                <Typography variant='h3'>Settings</Typography>
-                <Typography variant='h4'>Profile picture</Typography>
-                <Typography variant='h4'>About me</Typography>
-                <Button variant='contained'> Update</Button>
+                <Typography variant='h3'>Ustawienia</Typography>
+                <ProfilePicture
+                    height={profPictureHeight}
+                    width={profPictureWidth}
+                />
+                <Description />
             </Box>
         </>
     );
