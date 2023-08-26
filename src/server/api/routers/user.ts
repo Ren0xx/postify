@@ -90,4 +90,18 @@ export const userRouter = createTRPCRouter({
             }
         });
     }),
+    updateUserName: protectedProcedure.input(z.object({ userName: z.string() })).mutation(async ({ ctx, input }) => {
+        return ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: {
+                name: input.userName
+            }
+        });
+    }),
+    getLoggedUserName: protectedProcedure.query(async ({ ctx }) => {
+        return ctx.prisma.user.findUnique({
+            where: { id: ctx.session.user.id },
+            select: { name: true }
+        });
+    }),
 });

@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import ProfilePicture from "@/components/UserPage/ProfilePicture";
 import Description from "@/components/Settings/Description";
+import UserNameSection from "@/components/Settings/UserNameSection";
 export default function Settings() {
     const { data: sessionData } = useSession();
     const [profPictureWidth, profPictureHeight] = [50, 50];
@@ -28,7 +29,8 @@ export default function Settings() {
                     height={profPictureHeight}
                     width={profPictureWidth}
                 />
-                <Description />
+                <Description isLogged={!sessionData} />
+                <UserNameSection isLogged={!sessionData} />
             </Box>
         </>
     );

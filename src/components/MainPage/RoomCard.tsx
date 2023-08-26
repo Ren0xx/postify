@@ -12,14 +12,12 @@ type RoomCardProps = {
 };
 export default function RoomCard(props: RoomCardProps) {
     const { name, id, tags } = props.room;
-    console.log(tags);
     return (
         <Card elevation={2} sx={{ my: 1, textTransform: "capitalize" }}>
             <CardContent>
                 <Typography variant='h5' color='text.secondary' gutterBottom>
                     {name}
                 </Typography>
-                <Typography variant='h5' component='div'></Typography>
                 <Typography variant='body1'>
                     Tagi:{" "}
                     {tags.map((tag) => (

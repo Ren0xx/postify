@@ -1,19 +1,14 @@
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Loading from "@/components/utils/Loading";
-import useUserDescription from "@/hooks/useUserDescription";
-type DescProps = {
-    isLogged: boolean;
-}
-const Description = ({isLogged}: DescProps) => {
-    const {
-        description,
-        isLoading,
-        isRefetching,
-        updateDescription,
-        handleChange,
-    } = useUserDescription(isLogged);
+import useUserName from "@/hooks/useUserName";
 
+type UserNameProps = {
+    isLogged: boolean;
+};
+const UserNameSection = ({ isLogged }: UserNameProps) => {
+    const { name, updateUserName, handleChange, isLoading } =
+        useUserName(isLogged);
     return (
         <Box
             sx={{
@@ -22,15 +17,15 @@ const Description = ({isLogged}: DescProps) => {
                 gap: 2,
                 alignItems: "center",
             }}>
-            <Typography variant='h4'>Twój opis</Typography>
+            <Typography variant='h4'>Zmień nick</Typography>
             {isLoading ? (
                 <Loading />
             ) : (
                 <TextField
                     id='outlined-multiline-static'
                     multiline
-                    value={description}
-                    rows={4}
+                    value={name}
+                    rows={2}
                     onChange={handleChange}
                 />
             )}
@@ -38,8 +33,8 @@ const Description = ({isLogged}: DescProps) => {
             <LoadingButton
                 variant='contained'
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                onClick={updateDescription}
-                loading={isLoading || isRefetching}
+                onClick={updateUserName}
+                loading={isLoading}
                 loadingIndicator='Wczytywanie'>
                 Zaktualizuj
             </LoadingButton>
@@ -47,4 +42,4 @@ const Description = ({isLogged}: DescProps) => {
     );
 };
 
-export default Description;
+export default UserNameSection;

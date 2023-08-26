@@ -58,7 +58,6 @@ export default function Room() {
     const isUserAllowed = room?.allowedUsers.some(
         (user) => user.id === sessionData?.user.id
     );
-    console.log(room.isPublic);
     const isOwner = room?.ownerId === sessionData?.user.id;
     if (!isUserAllowed && !isOwner && !isError && !room.isPublic) {
         return <NotAuthorized password={room.password} roomId={room.id} />;
