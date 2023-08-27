@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { api } from "@/utils/api";
 import { useRouter } from "next/navigation";
 import TagCategories from "@/utils/db/tagCategories";
-import { number, object } from "zod";
 const useCreateRoom = () => {
     const router = useRouter();
     const [open, setOpen] = useState<boolean>(false);
@@ -21,6 +20,7 @@ const useCreateRoom = () => {
     const validationSchema = yup.object({
         name: yup
             .string()
+            .trim()
             .required("To pole jest wymagane")
             .min(1, "Wypełnij to pole")
             .max(50, "Nazwa nie może być dłuższa niż 50 znaków"),
@@ -87,7 +87,7 @@ const useCreateRoom = () => {
         }
     );
     const handleTagsChange = (
-        event: React.ChangeEvent<object>,
+        _event: React.ChangeEvent<object>,
         newValue: { id: number; label: string }[]
     ) => {
         void formik.setFieldValue("tags", newValue);

@@ -7,8 +7,7 @@ type UserNameProps = {
     isLogged: boolean;
 };
 const UserNameSection = ({ isLogged }: UserNameProps) => {
-    const { name, updateUserName, handleChange, isLoading } =
-        useUserName(isLogged);
+    const { isLoading, formik } = useUserName(isLogged);
     return (
         <Box
             sx={{
@@ -21,23 +20,35 @@ const UserNameSection = ({ isLogged }: UserNameProps) => {
             {isLoading ? (
                 <Loading />
             ) : (
-                <TextField
-                    id='outlined-multiline-static'
-                    multiline
-                    value={name}
-                    rows={2}
-                    onChange={handleChange}
-                />
-            )}
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: 2,
+                    }}
+                    component='form'
+                    onSubmit={formik.handleSubmit}>
+                    <TextField
+                        id='name'
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        error={
+                            formik.touched.name && Boolean(formik.errors.name)
+                        }
+                        helperText={formik.touched.name && formik.errors.name}
+                    />
 
-            <LoadingButton
-                variant='contained'
-                // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                onClick={updateUserName}
-                loading={isLoading}
-                loadingIndicator='Wczytywanie'>
-                Zaktualizuj
-            </LoadingButton>
+                    <LoadingButton
+                        type='submit'
+                        variant='contained'
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                        loading={isLoading}
+                        loadingIndicator='Wczytywanie'>
+                        Zaktualizuj
+                    </LoadingButton>
+                </Box>
+            )}
         </Box>
     );
 };

@@ -1,35 +1,45 @@
-import { useState } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import { api } from "@/utils/api";
 
 const useUserDescription = (isLogged: boolean) => {
-    const [description, setDescription] = useState<string>("");
-
-    const { isLoading, refetch, isRefetching } =
+    const { data, isLoading, refetch, isRefetching } =
         api.user.getLoggedUserDescription.useQuery(undefined, {
             enabled: isLogged,
             onSuccess: (data) => {
                 if (data !== undefined && data !== null) {
-                    setDescription(data.description);
+                    handleDescChange(data.description);
                 }
             },
         });
 
     const update = api.user.updateLoggedUserDescription.useMutation({});
-    const updateDescription = async () => {
-        await update.mutateAsync({ description });
-        void refetch();
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setDescription(event.target.value);
+    const validationSchema = yup.object({
+        description: yup
+            .string()
+            .trim()
+            .required("To pole jest wymagane")
+            .min(1, "Wypełnij to pole")
+            .max(120, "Opis nie może być dłuższy niż 120 znaków"),
+    });
+    const formik = useFormik({
+        initialValues: {
+            description: data?.description as string,
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            await update.mutateAsync({ description: values.description });
+            void refetch();
+        },
+    });
+    const handleDescChange = (newValue: string) => {
+        void formik.setFieldValue("description", newValue.trim());
     };
 
     return {
-        description,
+        formik,
         isLoading,
         isRefetching,
-        updateDescription,
-        handleChange,
     };
 };
 
