@@ -1,23 +1,17 @@
 import { Grid, Typography } from "@mui/material";
-import RoomChat from "@/components/MainPage/RoomChat";
-import RoomsList from "./MainPage/RoomsList";
-import CreateRoomForm from "./MainPage/CreateRoomForm";
+import RoomsList from "@/components/MainPage/RoomsList";
+import Hero from "@/components/MainPage/Hero";
+import CreateRoomForm from "@/components/MainPage/CreateRoomForm";
 const Homepage = () => {
     return (
         <>
-            <Typography variant='h2'>Witaj w Postify</Typography>
-            <Typography variant='body1'>
-                Stwórz wlasny chat lub dołącz do wielu innych ktore cie
-                zainteresują!
-            </Typography>
-            <hr />
+           
+            <Hero />
             <Grid container spacing={2} sx={{ minHeight: "80vh", my: 1 }}>
                 <Grid item xs={1} md={3}>
                     <RoomsList />
                 </Grid>
-                <Grid item xs={11} md={9}>
-                    <RoomChat />
-                </Grid>
+                <Grid item xs={11} md={9}></Grid>
             </Grid>
             <CreateRoomForm />
         </>

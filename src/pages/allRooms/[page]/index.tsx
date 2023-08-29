@@ -1,5 +1,6 @@
 import { Box, CircularProgress } from "@mui/material";
 import { useState } from "react";
+import SignIn from "@/components/SignIn";
 import useIsLogged from "@/hooks/useIsLogged";
 import RoomsList from "@/components/Rooms/RoomsList";
 import TagsFilter from "@/components/Rooms/TagsFilter";
@@ -28,11 +29,16 @@ export default function Rooms() {
         });
     };
 
-    const { data: allTags } = api.tag.getAll.useQuery(undefined, {});
+    const { data: allTags } = api.tag.getAll.useQuery(undefined, {
+        enabled: isLogged === true,
+    });
     const { data, isLoading, isError } = api.room.getRoomsPaginated.useQuery(
         { page: currentPage, tags: selectedTags },
         { enabled: isLogged === true }
     );
+    if (!isLogged) {
+        return <SignIn />;
+    }
     if (isError) {
         return (
             <>

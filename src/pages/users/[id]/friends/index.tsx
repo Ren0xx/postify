@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 import Friends from "@/components/UserPage/Friends";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/utils/Loading";
+import SignIn from "@/components/SignIn";
 const FriendsPage = () => {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -19,7 +20,9 @@ const FriendsPage = () => {
         { id: id },
         { enabled: sessionData?.user !== undefined }
     );
-
+    if (!sessionData) {
+        return <SignIn />;
+    }
     if (isLoading) {
         return (
             <>

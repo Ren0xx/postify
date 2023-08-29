@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 
 type Message = RouterOutputs["message"]["getOne"];
 type Tag = RouterOutputs["tag"]["getOne"];
+import SignIn from "@/components/SignIn";
 import AdminSection from "@/components/ChatRoom/AdminSection";
 import TagsSection from "@/components/ChatRoom/TagsSection";
 import InfoSection from "@/components/ChatRoom/InfoSection";
@@ -31,6 +32,9 @@ export default function Room() {
             void refetch();
         },
     });
+    if (!sessionData) {
+        return <SignIn />;
+    }
     const deleteTag = (tagId: string) => {
         if (!isOwner) return;
         void deleteOne.mutateAsync({ tagId, roomId });

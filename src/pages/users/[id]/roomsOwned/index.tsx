@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Loading from "@/components/utils/Loading";
 import RoomCard from "@/components/MainPage/RoomCard";
+import SignIn from "@/components/SignIn";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 const RoomsOwned = () => {
     const { data: sessionData } = useSession();
@@ -19,6 +20,9 @@ const RoomsOwned = () => {
         { id },
         { enabled: sessionData?.user !== undefined }
     );
+    if (!sessionData) {
+        return <SignIn />;
+    }
     if (isLoading) {
         return (
             <>

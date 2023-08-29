@@ -1,18 +1,21 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import ProfilePicture from "@/components/UserPage/ProfilePicture";
 import Description from "@/components/Settings/Description";
 import UserNameSection from "@/components/Settings/UserNameSection";
+import SignIn from "@/components/SignIn";
 export default function Settings() {
     const { data: sessionData } = useSession();
     const [profPictureWidth, profPictureHeight] = [50, 50];
-
+    if (!sessionData) {
+        return <SignIn />;
+    }
     return (
         <>
             <Head>
                 <title>
-                    {sessionData?.user?.name ?? "Anonymous user"} - Mockbook
+                    {sessionData?.user?.name ?? "Anonymous user"} - Postify
                 </title>
             </Head>
             <Box

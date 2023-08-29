@@ -8,6 +8,7 @@ import SiteLoading from "@/components/utils/SiteLoading";
 import UserNotFound from "@/components/utils/UserNotFound";
 import { useSession } from "next-auth/react";
 import AddOrRemoveFriend from "@/components/UserPage/AddOrRemoveFriend";
+import SignIn from "@/components/SignIn";
 export default function UserProfile() {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -30,6 +31,9 @@ export default function UserProfile() {
     } = api.user.getLoggedUserFriends.useQuery(undefined, {
         enabled: sessionData?.user !== undefined,
     });
+    if (!sessionData) {
+        return <SignIn />;
+    }
 
     const isFriend = userFriends?.User_A.some((friend) => friend.id === userId);
     //adding or removing user from friends
