@@ -18,7 +18,7 @@ export default function RoomCard(props: RoomCardProps) {
                 <Typography variant='h5' color='text.secondary' gutterBottom>
                     {name}
                 </Typography>
-                <Typography variant='body1'>
+                <Typography variant='body1' component='div'>
                     Tagi:{" "}
                     {tags.map((tag) => (
                         <Typography
