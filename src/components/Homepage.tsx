@@ -6,13 +6,7 @@ const Homepage = () => {
     return (
         <>
             <Hero />
-            <Grid container spacing={2} sx={{ my: 1 }}>
-                <Grid item xs={1} md={3}>
-                    <RoomsList />
-                </Grid>
-                <Grid item xs={11} md={9}>
-                </Grid>
-            </Grid>
+            <RoomsList />
             <CreateRoomForm />
         </>
     );
