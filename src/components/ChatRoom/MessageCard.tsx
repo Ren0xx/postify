@@ -56,7 +56,7 @@ const MessageCard = (props: MessageProps) => {
                     deleteButtonRef.current.style.opacity = "0";
                 }
             }}>
-            <Grid container spacing={1} sx={{ m: 2 }}>
+            <Grid container>
                 {!isSmallScreen && (
                     <Grid
                         item
@@ -65,7 +65,7 @@ const MessageCard = (props: MessageProps) => {
                         sx={{
                             display: "flex",
                             alignItems: "center",
-                            gap: 1,
+                            pl: 2.5,
                         }}>
                         <Avatar
                             component={Link}

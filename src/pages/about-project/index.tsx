@@ -40,10 +40,6 @@ export default function AboutProject() {
             <Typography variant='h2' gutterBottom textAlign={"center"}>
                 O tym projekcie
             </Typography>
-            <Typography variant='body1' fontSize='1.5rem'></Typography>
-
-            <br />
-            <Typography variant='body1' fontSize='1.5rem'></Typography>
             <AnimatedText
                 texts={[about, technologies, functionalities, contact]}
             />

@@ -19,10 +19,9 @@ const RoomChat = (props: RoomChatProps) => {
                     height: "500px",
                     overflowY: "auto",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "space-between",
                     flexDirection: "column",
-                    py: 1,
+                    p: 0,
+                    m: "0 0 0 1em",
                 }}
                 ref={messagesEndRef}>
                 {rtMessages?.map((message: Message) => (

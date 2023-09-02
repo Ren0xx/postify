@@ -1,5 +1,5 @@
 import RoomCard from "@/components/MainPage/RoomCard";
-import { Pagination, PaginationItem } from "@mui/material";
+import { Box, Pagination, PaginationItem } from "@mui/material";
 import { type RouterOutputs } from "@/utils/api";
 import Link from "next/link";
 type Room = RouterOutputs["room"]["getRoomsPaginated"]["rooms"][0];
@@ -13,11 +13,11 @@ const RoomsList = (props: RoomsListProps) => {
     return (
         <div>
             <h1>Przeszukaj pokoje.</h1>
-            <div>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {rooms?.map((room: Room) => (
                     <RoomCard key={room.id} room={room} />
                 ))}
-            </div>
+            </Box>
             <Pagination
                 count={pagesCount}
                 page={currentPage}
