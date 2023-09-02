@@ -32,8 +32,8 @@ export default function Settings() {
                     height={profPictureHeight}
                     width={profPictureWidth}
                 />
-                <UserNameSection isLogged={!sessionData} />
-                <Description isLogged={!sessionData} />
+                <UserNameSection isLogged={!!sessionData} />
+                <Description isLogged={!!sessionData} />
             </Box>
         </>
     );

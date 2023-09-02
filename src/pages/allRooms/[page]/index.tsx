@@ -1,4 +1,3 @@
-import { Box, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import SignIn from "@/components/SignIn";
 import useIsLogged from "@/hooks/useIsLogged";
