@@ -31,9 +31,6 @@ export default function UserProfile() {
     } = api.user.getLoggedUserFriends.useQuery(undefined, {
         enabled: sessionData?.user !== undefined,
     });
-    if (!sessionData) {
-        return <SignIn />;
-    }
 
     const isFriend = userFriends?.User_A.some((friend) => friend.id === userId);
     //adding or removing user from friends
@@ -62,6 +59,9 @@ export default function UserProfile() {
     const addOrRemoveFriend = () => {
         void (isFriend ? removeOne(userId) : addOne(userId));
     };
+    if (!sessionData) {
+        return <SignIn />;
+    }
     if (isLoading) {
         return (
             <>

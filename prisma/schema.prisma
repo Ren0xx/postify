@@ -87,8 +87,8 @@ model Message {
   creatorImage String?
   creatorName  String?
   creatorId    String
-  creator   User     @relation(fields: [creatorId], references: [id])
-  room         Room     @relation(fields: [roomId], references: [id])
+  creator   User     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  room         Room     @relation(fields: [roomId], references: [id], onDelete:  Cascade)
 }
 
 enum TagCategory {

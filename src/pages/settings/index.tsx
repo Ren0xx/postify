@@ -4,6 +4,7 @@ import Head from "next/head";
 import ProfilePicture from "@/components/UserPage/ProfilePicture";
 import Description from "@/components/Settings/Description";
 import UserNameSection from "@/components/Settings/UserNameSection";
+import DeleteAccount from "@/components/Settings/DeleteAccount";
 import SignIn from "@/components/SignIn";
 export default function Settings() {
     const { data: sessionData } = useSession();
@@ -34,6 +35,7 @@ export default function Settings() {
                 />
                 <UserNameSection isLogged={!!sessionData} />
                 <Description isLogged={!!sessionData} />
+                <DeleteAccount />
             </Box>
         </>
     );
