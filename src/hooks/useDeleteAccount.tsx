@@ -15,7 +15,7 @@ const useDeleteAccount = () => {
     const deleteOne = api.user.deleteOne.useMutation({});
     const deleteAccount = async () => {
         await deleteOne.mutateAsync();
-        router.push("/");
+        router.refresh();
     };
     return {
         open,

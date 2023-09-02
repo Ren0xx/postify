@@ -38,7 +38,7 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime? @db.Timestamptz(6)
-  createdAt     DateTime  @db.Timestamptz(6)
+  createdAt     DateTime   @default(now()) @db.Timestamptz(6)
   description   String    @default("No description yet")
   image         String?
   accounts      Account[]
