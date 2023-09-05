@@ -6,6 +6,7 @@ type RoomCardProps = {
 };
 export default function RoomCard(props: RoomCardProps) {
     const { name, id, tags } = props.room;
+    const shortenName = name.length > 10 ? name.substring(0, 10) + "..." : name;
     return (
         <Card
             elevation={4}
@@ -20,7 +21,7 @@ export default function RoomCard(props: RoomCardProps) {
                         color='text.secondary'
                         gutterBottom
                         sx={{ textAlign: "center" }}>
-                        {name}
+                        {shortenName}
                     </Typography>
                     <Typography
                         variant='body1'

@@ -23,8 +23,15 @@ export default function AboutProject() {
     );
     const contact = (
         <Typography variant='body1' fontSize={20} m={4}>
-            Jeśli jesteś zainteresowany kontaktem ze mną, przejdź do sekcji{" "}
-            <Link href='/contact-me'>Kontakt</Link>.
+            Jeśli jesteś zainteresowany kontaktem ze mną, napisz do{" "}
+            <Link
+                variant='h6'
+                underline='none'
+                color='info.main'
+                component='a'
+                href='mailto:adamzaleski00@gmail.com?subject=Hello&body=Hello,%20how%20are%20you?'>
+                mnie.
+            </Link>
         </Typography>
     );
     return (

@@ -4,7 +4,7 @@ import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import Layout from "@/components/Layout";
 import Head from "next/head";
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -22,7 +22,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <Layout>
                 <Component {...pageProps} />
             </Layout>
-            <Footer />
+            <Layout>
+                <Footer />
+            </Layout>
         </SessionProvider>
     );
 };

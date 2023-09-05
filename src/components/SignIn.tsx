@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { signIn } from "next-auth/react";
 import Layout from "./Layout";
 import { Box, Button, Paper, Typography } from "@mui/material";
@@ -56,4 +57,4 @@ const SignIn: React.FC = () => {
         </Layout>
     );
 };
-export default SignIn;
+export default memo(SignIn);

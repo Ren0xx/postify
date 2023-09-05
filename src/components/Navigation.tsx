@@ -3,7 +3,6 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { type Session } from "next-auth";
 import Link from "next/link";
-// import SideMenu from "@/components/Header/SideMenu";
 import ChatIcon from "@mui/icons-material/Chat";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
