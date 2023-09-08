@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
 import { type RouterOutputs } from "@/utils/api";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
@@ -7,6 +8,7 @@ type RoomCardProps = {
 export default function RoomCard(props: RoomCardProps) {
     const { name, id, tags } = props.room;
     const shortenName = name.length > 10 ? name.substring(0, 10) + "..." : name;
+    const firstTwoTags = useMemo(() => tags.slice(0, 2), [tags]);
     return (
         <Card
             elevation={4}
@@ -28,7 +30,7 @@ export default function RoomCard(props: RoomCardProps) {
                         component='div'
                         sx={{ textAlign: "center" }}>
                         Tagi:{" "}
-                        {tags.map((tag) => (
+                        {firstTwoTags.map((tag) => (
                             <Typography
                                 variant='body2'
                                 color='text.secondary'

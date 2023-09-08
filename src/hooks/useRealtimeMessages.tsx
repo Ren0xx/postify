@@ -9,7 +9,10 @@ const useRealTimeMessages = (roomId: string, messages: Message[]) => {
 
     const scrollToBottom = () => {
         const lastChildElement = messagesEndRef.current?.lastElementChild;
-        lastChildElement?.scrollIntoView({ behavior: "smooth", block: "end" });
+        lastChildElement?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+        });
     };
     useEffect(() => {
         const channel = supabase
@@ -35,7 +38,9 @@ const useRealTimeMessages = (roomId: string, messages: Message[]) => {
                             ...prevMessages,
                             payload.new as Message,
                         ]);
-                        scrollToBottom();
+                        setTimeout(() => {
+                            scrollToBottom();
+                        }, 100);
                     }
                 }
             )

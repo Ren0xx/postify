@@ -17,7 +17,7 @@ const Footer = () => {
                     mt: "auto",
                     display: "flex",
                     flex: 1,
-                    justifyContent: "space-evenly",
+                    justifyContent: "space-between",
                 }}>
                 <Contact />
                 <Features />

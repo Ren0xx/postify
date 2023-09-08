@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-
 import Link from "next/link";
 import { useMemo } from "react";
 import { useSession } from "next-auth/react";

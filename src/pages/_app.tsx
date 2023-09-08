@@ -21,8 +21,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <Header />
             <Layout>
                 <Component {...pageProps} />
-            </Layout>
-            <Layout>
                 <Footer />
             </Layout>
         </SessionProvider>
