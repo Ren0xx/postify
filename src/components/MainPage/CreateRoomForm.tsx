@@ -26,6 +26,10 @@ const CreateRoomForm = () => {
     return (
         <>
             <Button
+                sx={{
+                    px: 3,
+                    py: 2,
+                }}
                 variant='contained'
                 onClick={handleClickOpen}
                 id='open-create-room-form'>

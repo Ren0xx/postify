@@ -1,13 +1,13 @@
 import RoomsList from "@/components/MainPage/RoomsList";
 import Hero from "@/components/MainPage/Hero";
-import CreateRoomForm from "@/components/MainPage/CreateRoomForm";
+import CreateRoom from "@/components/MainPage/CreateRoom";
 import RealtimeDisplay from "@/components/MainPage/RealtimeDisplay";
 const Homepage = () => {
     return (
         <>
             <Hero />
+            <CreateRoom/>
             <RoomsList />
-            <CreateRoomForm />
             <RealtimeDisplay />
         </>
     );

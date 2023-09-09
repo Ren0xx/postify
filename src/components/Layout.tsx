@@ -1,8 +1,9 @@
 import { Container } from "@mui/material";
-const Layout = ({ children }: { children: React.ReactNode }) => {
+import { type ElementType } from "react";
+const Layout = ({ children, surroundComponentName }: { children: React.ReactNode, surroundComponentName: ElementType}) => {
     return (
-        <Container maxWidth='lg'>
-            <main>{children}</main>
+        <Container maxWidth='lg' component={surroundComponentName}>
+            {children}
         </Container>
     );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
@@ -18,7 +18,7 @@ const RealtimeDisplay: React.FC = () => {
     }, [isSmallScreen]);
 
     return (
-        <Box>
+        <section>
             <Typography variant='h4' textAlign={"center"} mb={4}>
                 Odkryj efektywność czatu w czasie rzeczywistym!
             </Typography>
@@ -37,7 +37,7 @@ const RealtimeDisplay: React.FC = () => {
                 )}
                 Your browser does not support the video tag.
             </video>
-        </Box>
+        </section>
     );
 };
 

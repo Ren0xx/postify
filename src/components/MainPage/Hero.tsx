@@ -3,6 +3,7 @@ import Link from "next/link";
 const Hero = () => {
     return (
         <Box
+            component='section'
             sx={{
                 position: "relative",
                 backgroundImage: "url(/assets/images/people_talking.jpg)",

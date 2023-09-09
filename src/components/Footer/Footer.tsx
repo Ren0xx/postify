@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Contact from "./Contact";
 import Features from "./Features";
+import Resources from "./Resources";
 const Footer = () => {
     return (
         <Box
@@ -10,7 +11,6 @@ const Footer = () => {
                 // minHeight: "100vh",
             }}>
             <Box
-                component='footer'
                 sx={{
                     py: 3,
                     px: 2,
@@ -19,8 +19,9 @@ const Footer = () => {
                     flex: 1,
                     justifyContent: "space-between",
                 }}>
-                <Contact />
                 <Features />
+                <Resources />
+                <Contact />
             </Box>
         </Box>
     );

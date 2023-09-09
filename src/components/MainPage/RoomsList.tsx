@@ -1,4 +1,4 @@
-import {  Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import RoomCard from "@/components/MainPage/RoomCard";
 import { api, type RouterOutputs } from "@/utils/api";
 import RoomCardSkeleton from "@/components/Loadings/RoomCardSkeleton";
@@ -15,9 +15,7 @@ const RoomsList = () => {
 
     return (
         <section>
-            <Typography
-                variant='h2'
-                sx={{ m: 4, fontSize: 28, textAlign: "center" }}>
+            <Typography variant='h4' sx={{ m: 4, textAlign: "center" }}>
                 Pokoje które mogą cię zainteresować:
             </Typography>
             <Grid container spacing={4}>

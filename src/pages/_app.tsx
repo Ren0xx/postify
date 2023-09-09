@@ -19,8 +19,10 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Header />
-            <Layout>
+            <Layout surroundComponentName={"main"}>
                 <Component {...pageProps} />
+            </Layout>
+            <Layout surroundComponentName={"footer"}>
                 <Footer />
             </Layout>
         </SessionProvider>
