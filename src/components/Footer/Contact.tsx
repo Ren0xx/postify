@@ -6,11 +6,16 @@ import GithubIcon from "@mui/icons-material/GitHub";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 const Contact = () => {
     return (
-        <div>
+        <Box
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+            }}>
             <LogoWithName />
             <ContactIcons />
             <Copyright />
-        </div>
+        </Box>
     );
 };
 

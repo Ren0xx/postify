@@ -1,29 +1,28 @@
-import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
 import Contact from "./Contact";
 import Features from "./Features";
 import Resources from "./Resources";
 const Footer = () => {
     return (
-        <Box
-            sx={{
-                display: "flex",
-                // flexDirection: "column",
-                // minHeight: "100vh",
-            }}>
-            <Box
-                sx={{
-                    py: 3,
-                    px: 2,
-                    mt: "auto",
-                    display: "flex",
-                    flex: 1,
-                    justifyContent: "space-between",
-                }}>
+        <Grid container spacing={2} justifyContent='center' my={4}>
+            <Grid item xs={12} sm={4}>
                 <Features />
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                sm={4}
+                sx={{ display: "flex", justifyContent: "center" }}>
                 <Resources />
+            </Grid>
+            <Grid
+                item
+                xs={12}
+                sm={4}
+                sx={{ display: "flex", justifyContent: "flex-end", pr: 1 }}>
                 <Contact />
-            </Box>
-        </Box>
+            </Grid>
+        </Grid>
     );
 };
 

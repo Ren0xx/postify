@@ -1,11 +1,11 @@
 import { type Session } from "next-auth";
+import { Container } from "@mui/material";
 import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer/Footer";
-import Layout from "@/components/Layout";
 import Head from "next/head";
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
@@ -19,12 +19,12 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Header />
-            <Layout surroundComponentName={"main"}>
+            <Container maxWidth='lg' component='main'>
                 <Component {...pageProps} />
-            </Layout>
-            <Layout surroundComponentName={"footer"}>
+            </Container>
+            <Container maxWidth='lg' component='footer' sx={{ mt: "auto" }}>
                 <Footer />
-            </Layout>
+            </Container>
         </SessionProvider>
     );
 };
