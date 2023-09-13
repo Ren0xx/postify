@@ -5,6 +5,7 @@ const Loading = () => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
+                alignItems: "center",
                 mt: 10,
             }}>
             <CircularProgress color='inherit' />

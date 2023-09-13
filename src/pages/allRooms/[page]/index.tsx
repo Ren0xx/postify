@@ -3,7 +3,7 @@ import SignIn from "@/components/SignIn";
 import useIsLogged from "@/hooks/useIsLogged";
 import RoomsList from "@/components/Rooms/RoomsList";
 import TagsFilter from "@/components/Rooms/TagsFilter";
-import Loading from "@/components/utils/Loading";
+import ThreeDotsWave from "@/components/Animations/ThreeDotsWave";
 import { api } from "@/utils/api";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -55,8 +55,9 @@ export default function Rooms() {
                 selectedTags={selectedTags}
                 onTagClick={handleTagChange}
             />
-            {isLoading && <RoomsLoader />}
-            {!isLoading && (
+            {isLoading ? (
+                <RoomsLoader />
+            ) : (
                 <RoomsList
                     rooms={data.rooms}
                     pagesCount={data.totalPages}
@@ -73,7 +74,7 @@ const RoomsLoader = () => {
             <Head>
                 <title>Wczytywanie...</title>
             </Head>
-            <Loading />
+            <ThreeDotsWave />
         </>
     );
 };

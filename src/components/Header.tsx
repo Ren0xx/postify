@@ -7,7 +7,7 @@ import LogoWithName from "@/components/Header/LogoWithName";
 const Header = () => {
     const { data: sessionData } = useSession();
     return (
-        <AppBar position='static' color='transparent'>
+        <AppBar position='static' >
             <Container sx={{ flexGrow: 1 }} maxWidth='lg'>
                 <Toolbar sx={{ justifyContent: "space-between", gap: 2 }}>
                     <LogoWithName />
