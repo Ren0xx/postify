@@ -45,7 +45,6 @@ const Navigation = ({ sessionData }: NavProps) => {
             }}>
             {isMobile ? (
                 <SideMenu hrefsWithNames={hrefsWithNames} />
-
             ) : (
                 hrefsWithNames.map((obj) => (
                     <Typography

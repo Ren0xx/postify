@@ -15,7 +15,7 @@ const RoomsList = () => {
 
     return (
         <section>
-            <Typography variant='h4' sx={{ m: 4, textAlign: "center" }}>
+            <Typography variant='h4' m={6} textAlign='center'>
                 Pokoje które mogą cię zainteresować:
             </Typography>
             <Grid container spacing={4}>

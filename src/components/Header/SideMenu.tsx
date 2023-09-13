@@ -31,6 +31,7 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
                 onClick={handleDrawerOpen}>
                 <MenuIcon />
             </IconButton>
+
             <Drawer
                 anchor='right'
                 open={isDrawerOpen}
@@ -42,9 +43,7 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
                                 component={Link}
                                 href={obj.href}
                                 onClick={handleDrawerClose}>
-                                <ListItemIcon>
-                                    {obj.icon}
-                                </ListItemIcon>
+                                <ListItemIcon>{obj.icon}</ListItemIcon>
                                 <ListItemText
                                     primary={obj.name.toUpperCase()}
                                 />
