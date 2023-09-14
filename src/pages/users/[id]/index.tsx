@@ -2,8 +2,6 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { api, type RouterOutputs } from "@/utils/api";
 import About from "@/components/UserPage/About";
-import Head from "next/head";
-type User = RouterOutputs["user"]["getOne"];
 import SiteLoading from "@/components/utils/SiteLoading";
 import UserNotFound from "@/components/utils/UserNotFound";
 import { useSession } from "next-auth/react";
@@ -19,7 +17,6 @@ export default function UserProfile() {
         data: user,
         isLoading,
         isError,
-        refetch,
     } = api.user.getOne.useQuery(
         { id: userId },
         { enabled: sessionData?.user !== undefined }
@@ -63,29 +60,15 @@ export default function UserProfile() {
         return <SignIn />;
     }
     if (isLoading) {
-        return (
-            <>
-                <Head>
-                    <title>Wczytywanie...</title>
-                </Head>
-                <SiteLoading />
-            </>
-        );
+        return <SiteLoading />;
     }
     if (isError || user === null) {
-        return (
-            <>
-                <Head>
-                    <title>Wystąpił błąd</title>
-                </Head>
-                <UserNotFound />
-            </>
-        );
+        return <UserNotFound />;
     }
     return (
         <div>
             <AddOrRemoveFriend
-                isLoggedUserPage={userId === sessionData?.user.id}
+                isLoggedUserPage={user.id === sessionData?.user.id}
                 isDisabled={isDisabled}
                 isRefetching={isRefetching}
                 isFriend={isFriend}

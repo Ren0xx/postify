@@ -69,7 +69,7 @@ const MessageCard = (props: MessageProps) => {
                         }}>
                         <Avatar
                             component={Link}
-                            href={`/users/${slugify(name ?? "not-found")}`}
+                            href={`/users/${slugify(creatorId ?? "not-found")}`}
                             src={image ?? ""}
                             alt='Not found'
                             sx={{ mt: 2, p: 0, alignSelf: "flex-start" }}
@@ -97,7 +97,7 @@ const MessageCard = (props: MessageProps) => {
                             }}>
                             <Link
                                 underline='none'
-                                href={`/users/${slugify(name ?? "not-found")}`}>
+                                href={`/users/${slugify(creatorId ?? "not-found")}`}>
                                 <strong>{name}</strong>
                             </Link>
                             <p>{formattedToLocale(updatedAt || new Date())}</p>

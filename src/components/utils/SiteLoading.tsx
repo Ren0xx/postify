@@ -1,10 +1,15 @@
 import { Backdrop, CircularProgress } from "@mui/material";
-
+import Head from "next/head";
 const SiteLoading = () => {
     return (
-        <Backdrop open={true}>
-            <CircularProgress color='primary' />
-        </Backdrop>
+        <>
+            <Head>
+                <title>Wczytywanie...</title>
+            </Head>
+            <Backdrop open={true}>
+                <CircularProgress color='primary' />
+            </Backdrop>
+        </>
     );
 };
 

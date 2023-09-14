@@ -1,5 +1,21 @@
+import { Box, Typography } from "@mui/material";
+import Head from "next/head";
 const RoomNotFound = () => {
-    return <div id="room-not-found">Room not found</div>;
+    return (
+        <>
+            <Head>
+                <title>Pokój nieznaleziony</title>
+            </Head>
+            <Box
+                id='room-not-found'
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: 8,
+                }}>
+                <Typography variant='h3'>Room not found</Typography>
+            </Box>
+        </>
+    );
 };
-
 export default RoomNotFound;

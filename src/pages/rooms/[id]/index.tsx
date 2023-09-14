@@ -32,32 +32,19 @@ export default function Room() {
             void refetch();
         },
     });
-    if (!sessionData) {
-        return <SignIn />;
-    }
+
     const deleteTag = (tagId: string) => {
         if (!isOwner) return;
         void deleteOne.mutateAsync({ tagId, roomId });
     };
+    if (!sessionData) {
+        return <SignIn />;
+    }
     if (isLoading) {
-        return (
-            <>
-                <Head>
-                    <title>Wczytywanie...</title>
-                </Head>
-                <SiteLoading />
-            </>
-        );
+        return <SiteLoading />;
     }
     if (isError || room === null) {
-        return (
-            <>
-                <Head>
-                    <title>Wystąpił błąd</title>
-                </Head>
-                <RoomNotFound />
-            </>
-        );
+        return <RoomNotFound />;
     }
     const isUserAllowed = room?.allowedUsers.some(
         (user) => user.id === sessionData?.user.id
