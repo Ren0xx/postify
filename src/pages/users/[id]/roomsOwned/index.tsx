@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import Loading from "@/components/utils/Loading";
 import RoomCard from "@/components/MainPage/RoomCard";
 import SignIn from "@/components/SignIn";
+import { Box, Typography } from "@mui/material";
+import CreateRoomForm from "@/components/MainPage/CreateRoomForm";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 const RoomsOwned = () => {
     const { data: sessionData } = useSession();
@@ -15,7 +17,6 @@ const RoomsOwned = () => {
         data: rooms,
         isLoading,
         isError,
-        refetch,
     } = api.user.getUserRooms.useQuery(
         { id },
         { enabled: sessionData?.user !== undefined }
@@ -24,14 +25,7 @@ const RoomsOwned = () => {
         return <SignIn />;
     }
     if (isLoading) {
-        return (
-            <>
-                <Head>
-                    <title>Wczytywanie...</title>
-                </Head>
-                <RoomsLoader />
-            </>
-        );
+        return <RoomsLoader />;
     }
     if (isError) {
         return (
@@ -45,9 +39,13 @@ const RoomsOwned = () => {
     }
     return (
         <div>
-            {rooms?.roomsOwned?.map((room: Room) => (
-                <RoomCard key={room.id} room={room} />
-            ))}
+            {rooms?.roomsOwned?.length === 0 ? (
+                <RoomsNotFound isOwner={id === sessionData?.user.id} />
+            ) : (
+                rooms?.roomsOwned?.map((room: Room) => (
+                    <RoomCard key={room.id} room={room} />
+                ))
+            )}
         </div>
     );
 };
@@ -62,4 +60,26 @@ const RoomsLoader = () => {
     );
 };
 
+const RoomsNotFound = ({ isOwner }: { isOwner: boolean }) => {
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 2,
+                mt: 2,
+            }}>
+            <Typography variant='h3'>Brak posiadanych pokoi.</Typography>
+            {isOwner ? (
+                <>
+                    <Typography>
+                        <i>Stwórz jeden już teraz! </i>
+                    </Typography>
+                    <CreateRoomForm />
+                </>
+            ) : null}
+        </Box>
+    );
+};
 export default RoomsOwned;
