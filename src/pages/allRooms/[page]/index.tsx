@@ -7,6 +7,7 @@ import ThreeDotsWave from "@/components/Animations/ThreeDotsWave";
 import { api } from "@/utils/api";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function Rooms() {
     const isLogged = useIsLogged();
     const router = useRouter();
@@ -49,7 +50,7 @@ export default function Rooms() {
         );
     }
     return (
-        <div>
+        <PageTransition>
             <TagsFilter
                 tags={allTags}
                 selectedTags={selectedTags}
@@ -64,7 +65,7 @@ export default function Rooms() {
                     currentPage={currentPage}
                 />
             )}
-        </div>
+        </PageTransition>
     );
 }
 

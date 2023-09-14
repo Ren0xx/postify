@@ -7,6 +7,7 @@ type RoomAuthProps = {
     roomId: string;
 };
 const RoomPasswordForm = (props: RoomAuthProps) => {
+    //TODO
     const router = useRouter();
     const [password, setPassword] = useState<string>("");
     const [isError, setError] = useState<boolean>(false);

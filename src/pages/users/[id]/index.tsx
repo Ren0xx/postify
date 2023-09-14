@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { api, type RouterOutputs } from "@/utils/api";
+import { api } from "@/utils/api";
 import About from "@/components/UserPage/About";
 import SiteLoading from "@/components/utils/SiteLoading";
 import UserNotFound from "@/components/utils/UserNotFound";
 import { useSession } from "next-auth/react";
 import AddOrRemoveFriend from "@/components/UserPage/AddOrRemoveFriend";
 import SignIn from "@/components/SignIn";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function UserProfile() {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -56,17 +57,18 @@ export default function UserProfile() {
     const addOrRemoveFriend = () => {
         void (isFriend ? removeOne(userId) : addOne(userId));
     };
-    if (!sessionData) {
-        return <SignIn />;
-    }
     if (isLoading) {
         return <SiteLoading />;
     }
+    if (!sessionData) {
+        return <SignIn />;
+    }
+
     if (isError || user === null) {
         return <UserNotFound />;
     }
     return (
-        <div>
+        <PageTransition>
             <AddOrRemoveFriend
                 isLoggedUserPage={user.id === sessionData?.user.id}
                 isDisabled={isDisabled}
@@ -82,6 +84,6 @@ export default function UserProfile() {
                 description={user.description}
                 roomsOwnedCount={user.roomsOwned.length}
             />
-        </div>
+        </PageTransition>
     );
 }

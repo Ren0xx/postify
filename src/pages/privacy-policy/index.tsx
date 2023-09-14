@@ -5,9 +5,10 @@ import {
     Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function PrivacyPolicy() {
     return (
-        <>
+        <PageTransition>
             <Typography variant='h2' textAlign={"center"} my={4}>
                 Polityka prywatności
             </Typography>
@@ -159,6 +160,6 @@ export default function PrivacyPolicy() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-        </>
+        </PageTransition>
     );
 }

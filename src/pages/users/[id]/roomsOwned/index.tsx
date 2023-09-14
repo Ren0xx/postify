@@ -7,6 +7,7 @@ import RoomCard from "@/components/MainPage/RoomCard";
 import SignIn from "@/components/SignIn";
 import { Box, Typography } from "@mui/material";
 import CreateRoomForm from "@/components/MainPage/CreateRoomForm";
+import { PageTransition } from "@/components/Animations/PageTransition";
 type Room = RouterOutputs["room"]["getTopRooms"][0];
 const RoomsOwned = () => {
     const { data: sessionData } = useSession();
@@ -38,7 +39,7 @@ const RoomsOwned = () => {
         );
     }
     return (
-        <div>
+        <PageTransition>
             {rooms?.roomsOwned?.length === 0 ? (
                 <RoomsNotFound isOwner={id === sessionData?.user.id} />
             ) : (
@@ -46,7 +47,7 @@ const RoomsOwned = () => {
                     <RoomCard key={room.id} room={room} />
                 ))
             )}
-        </div>
+        </PageTransition>
     );
 };
 const RoomsLoader = () => {

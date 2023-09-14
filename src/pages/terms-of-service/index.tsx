@@ -5,9 +5,10 @@ import {
     Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function TermsOfService() {
     return (
-        <>
+        <PageTransition>
             <Typography variant='h4' textAlign='center' my={4}>
                 Warunki korzystania z serwisu
             </Typography>
@@ -129,6 +130,6 @@ export default function TermsOfService() {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
-        </>
+        </PageTransition>
     );
 }

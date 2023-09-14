@@ -1,5 +1,6 @@
 import { Box, Link, Typography } from "@mui/material";
 import { AnimatedText } from "@/components/Animations/TextAnimations";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function AboutProject() {
     const about = (
         <Typography variant='body1' fontSize={20} m={4}>
@@ -36,7 +37,7 @@ export default function AboutProject() {
     );
     return (
         <Box
-            component='main'
+            component={PageTransition}
             sx={{
                 display: "flex",
                 flexDirection: "column",

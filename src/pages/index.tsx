@@ -1,5 +1,3 @@
-import styles from "./index.module.css";
-import Head from "next/head";
 import useIsLogged from "@/hooks/useIsLogged";
 import SignIn from "@/components/SignIn";
 import Homepage from "@/components/Homepage";
@@ -8,5 +6,5 @@ export default function Home() {
     if (!logged) {
         return <SignIn />;
     }
-    return <Homepage />;
+    return <Homepage />
 }

@@ -13,6 +13,7 @@ import InfoSection from "@/components/ChatRoom/InfoSection";
 import SiteLoading from "@/components/utils/SiteLoading";
 import RoomNotFound from "@/components/utils/RoomNotFound";
 import NotAuthorized from "@/components/utils/NotAuthorized";
+import { PageTransition } from "@/components/Animations/PageTransition";
 export default function Room() {
     const { data: sessionData } = useSession();
     const router = useRouter();
@@ -37,12 +38,14 @@ export default function Room() {
         if (!isOwner) return;
         void deleteOne.mutateAsync({ tagId, roomId });
     };
-    if (!sessionData) {
-        return <SignIn />;
-    }
+
     if (isLoading) {
         return <SiteLoading />;
     }
+    if (!sessionData) {
+        return <SignIn />;
+    }
+
     if (isError || room === null) {
         return <RoomNotFound />;
     }
@@ -60,21 +63,23 @@ export default function Room() {
                     Pokój &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
                 </title>
             </Head>
-            <InfoSection name={room.name} />
-            <TagsSection
-                tags={room.tags as Tag[]}
-                deleteTag={deleteTag}
-                canDelete={isOwner}
-            />
-            {isOwner && (
-                <AdminSection
-                    roomId={room.id}
+            <PageTransition>
+                <InfoSection name={room.name} />
+                <TagsSection
                     tags={room.tags as Tag[]}
-                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                    refetch={refetch}
+                    deleteTag={deleteTag}
+                    canDelete={isOwner}
                 />
-            )}
-            <RoomChat id={room.id} messages={room.messages as Message[]} />
+                {isOwner && (
+                    <AdminSection
+                        roomId={room.id}
+                        tags={room.tags as Tag[]}
+                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                        refetch={refetch}
+                    />
+                )}
+                <RoomChat id={room.id} messages={room.messages as Message[]} />
+            </PageTransition>
         </>
     );
 }
