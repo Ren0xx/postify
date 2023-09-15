@@ -10,7 +10,7 @@ const hrefsWithNames = [
 const Resources = () => {
     return (
         <div>
-            <Typography variant='h5' mb={2}>
+            <Typography variant='h5' mb={2} textAlign='center'>
                 Zasoby
             </Typography>
             <Box

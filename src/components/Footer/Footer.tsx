@@ -5,7 +5,11 @@ import Resources from "./Resources";
 const Footer = () => {
     return (
         <Grid container spacing={2} justifyContent='center' my={4}>
-            <Grid item xs={12} sm={4}>
+            <Grid
+                item
+                xs={12}
+                sm={4}
+                sx={{ display: "flex", justifyContent: "center" }}>
                 <Features />
             </Grid>
             <Grid
@@ -19,7 +23,7 @@ const Footer = () => {
                 item
                 xs={12}
                 sm={4}
-                sx={{ display: "flex", justifyContent: "flex-end", pr: 1 }}>
+                sx={{ display: "flex", justifyContent: "center", pr: 1 }}>
                 <Contact />
             </Grid>
         </Grid>

@@ -10,5 +10,14 @@ export const lightTheme = createTheme({
             main: '#d94863',
         },
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 525,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+        },
+    },
 
 });
