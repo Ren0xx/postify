@@ -1,30 +1,39 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { z } from "zod";
 import {
     createTRPCRouter,
     protectedProcedure,
 } from "@/server/api/trpc";
+import bcrypt from "bcrypt";
 
 export const roomRouter = createTRPCRouter({
     createRoom: protectedProcedure
         .input(z.object({
             name: z.string(),
             password: z.string().optional(),
-            isPublic: z.boolean().optional(),
             tagsIds: z.array(z.string())
         }))
         .mutation(async ({ ctx, input }) => {
-            const { name, password, isPublic, tagsIds } = input;
+            const { name, password, tagsIds } = input;
+
+            let hashedPassword: string | null = null;
+
+            if (typeof password === "string") {
+                hashedPassword = await bcrypt.hash(password, 10);
+            }
 
             const room = await ctx.prisma.room.create({
                 data: {
                     name,
                     ownerId: ctx.session.user.id,
-                    password: password || null,
-                    isPublic: isPublic || true,
+                    password: hashedPassword,
+                    isPublic: password ? false : true,
                     tags: {
                         connect: tagsIds.map(id => ({ id: id }))
                     }
-                },
+                }
             });
 
             return room;
@@ -44,6 +53,16 @@ export const roomRouter = createTRPCRouter({
     getOne: protectedProcedure.input(z.object({ id: z.string() })).query(({ ctx, input }) => {
         return ctx.prisma.room.findUnique({ where: { id: input.id }, include: { owner: true, tags: true, allowedUsers: true, messages: { include: { creator: true } } } });
 
+    }),
+
+    passwordMatches: protectedProcedure.input(z.object({ password: z.string(), roomPassword: z.string() })).query(async ({ input }) => {
+        const { password, roomPassword } = input;
+
+        const isPasswordValid = await bcrypt.compare(password, roomPassword);
+        if (!isPasswordValid) {
+            return false;
+        }
+        return true;
     }),
     addToAllowedUsers: protectedProcedure.input(z.object({ roomId: z.string() })).mutation(async ({ ctx, input }) => {
         return ctx.prisma.room.update({

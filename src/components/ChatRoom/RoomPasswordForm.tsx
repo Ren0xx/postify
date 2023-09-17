@@ -1,13 +1,13 @@
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { api } from "@/utils/api";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 type RoomAuthProps = {
-    password?: string | null;
+    roomPassword?: string | null;
     roomId: string;
 };
 const RoomPasswordForm = (props: RoomAuthProps) => {
-    //TODO
+    const { roomPassword, roomId } = props;
     const router = useRouter();
     const [password, setPassword] = useState<string>("");
     const [isError, setError] = useState<boolean>(false);
@@ -15,15 +15,27 @@ const RoomPasswordForm = (props: RoomAuthProps) => {
         setError(false);
         setPassword(e.target.value);
     };
-    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
-            if (password !== props.password) setError(true);
-            else allowOne();
+    const handleKeyPress = async (
+        event: React.KeyboardEvent<HTMLInputElement>
+    ) => {
+        if (event.key === "Enter" && !isRefetching) {
+            const d = refetch();
+            if ((await d).data) {
+                
+                allowOne();
+                return;
+            }
+            setError(true);
+            setPassword("");
         }
     };
+    const { isRefetching, refetch } = api.room.passwordMatches.useQuery(
+        { password, roomPassword: roomPassword ?? "" },
+        { enabled: false }
+    );
     const allowUser = api.room.addToAllowedUsers.useMutation({});
     const allowOne = () => {
-        void allowUser.mutateAsync({ roomId: props.roomId });
+        void allowUser.mutateAsync({ roomId });
         router.refresh();
     };
     return (
@@ -35,6 +47,7 @@ const RoomPasswordForm = (props: RoomAuthProps) => {
                 label='Hasło do pokoju'
                 id='message-content-field'
                 onChange={handleChange}
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
                 onKeyDown={handleKeyPress}
                 helperText={isError ? "Niepoprawne hasło." : ""}
             />
