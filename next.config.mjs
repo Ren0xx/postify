@@ -15,4 +15,5 @@ const config = {
 const millionConfig = {
     auto: true,
 };
-export default million.next(config, millionConfig);
+export default config;
+// export default million.next(config, millionConfig);
