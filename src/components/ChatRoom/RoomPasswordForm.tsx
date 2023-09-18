@@ -21,7 +21,6 @@ const RoomPasswordForm = (props: RoomAuthProps) => {
         if (event.key === "Enter" && !isRefetching) {
             const d = refetch();
             if ((await d).data) {
-                
                 allowOne();
                 return;
             }

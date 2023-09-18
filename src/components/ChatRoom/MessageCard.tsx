@@ -1,19 +1,10 @@
-import {
-    Avatar,
-    Box,
-    Stack,
-    Grid,
-    IconButton,
-    Link,
-    useMediaQuery,
-} from "@mui/material";
+import { Avatar, Box, Stack, Grid, Link, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import slugify from "slugify";
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { formattedToLocale } from "@/utils/dates/helperFuncs";
-import ClearIcon from "@mui/icons-material/Clear";
 import { useSession } from "next-auth/react";
-import { api } from "@/utils/api";
+import DeleteMessageModal from "@/components/ChatRoom/DeleteMessageModal";
 type MessageProps = {
     content: string;
     updatedAt: Date | undefined;
@@ -25,19 +16,16 @@ type MessageProps = {
 const MessageCard = (props: MessageProps) => {
     const { data: sessionData } = useSession();
     const { content, updatedAt, image, name, id, creatorId } = props;
+
     const deleteButtonRef = useRef<HTMLButtonElement>(null);
-    const deleteOne = api.message.deleteOne.useMutation();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-    const handleDelete = () => {
-        if (!isAuthor) return;
-        if (id) void deleteOne.mutateAsync({ id });
-    };
-    const isAuthor =
-        creatorId === sessionData?.user.id || creatorId === undefined
-            ? true
-            : false;
+    const isAuthor = useMemo(
+        () => creatorId === sessionData?.user.id || creatorId === undefined,
+        [creatorId, sessionData?.user.id]
+    );
+
     return (
         <Box
             sx={{
@@ -97,7 +85,9 @@ const MessageCard = (props: MessageProps) => {
                             }}>
                             <Link
                                 underline='none'
-                                href={`/users/${slugify(creatorId ?? "not-found")}`}>
+                                href={`/users/${slugify(
+                                    creatorId ?? "not-found"
+                                )}`}>
                                 <strong>{name}</strong>
                             </Link>
                             <p>{formattedToLocale(updatedAt || new Date())}</p>
@@ -105,22 +95,10 @@ const MessageCard = (props: MessageProps) => {
                         <p>{content}</p>
                     </Stack>
                     {isAuthor ? (
-                        <IconButton
-                            ref={deleteButtonRef}
-                            sx={{
-                                opacity: 0,
-                                transition: "opacity 0.2s",
-                                ml: "auto",
-                                px: 4,
-                                "&:hover": {
-                                    // Remove hover effect
-                                    backgroundColor: "transparent",
-                                    color: "inherit",
-                                },
-                            }}
-                            onClick={handleDelete}>
-                            <ClearIcon fontSize='large' />
-                        </IconButton>
+                        <DeleteMessageModal
+                            deleteButtonRef={deleteButtonRef}
+                            id={id}
+                        />
                     ) : null}
                 </Grid>
             </Grid>

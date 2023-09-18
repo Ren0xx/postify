@@ -1,4 +1,4 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import DeleteRoomModal from "@/components/ChatRoom/DeleteRoomModal";
 import AddTagsModal from "@/components/ChatRoom/AddTagsModal";
 import { type RouterOutputs } from "@/utils/api";
@@ -10,7 +10,13 @@ type AdminProps = {
 };
 const AdminSection = (props: AdminProps) => {
     return (
-        <Box sx={{ display: "flex", gap: "0.5em", justifyContent: "flex-end" }}>
+        <Box
+            sx={{
+                display: "flex",
+                gap: "0.5em",
+                justifyContent: "flex-end",
+                my: 1,
+            }}>
             <AddTagsModal
                 roomId={props.roomId}
                 tags={props.tags}
