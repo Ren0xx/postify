@@ -64,7 +64,6 @@ const useCreateRoom = () => {
             if (values.isPrivate) {
                 const room = await createRoom.mutateAsync({
                     name: values.name,
-                    // isPublic: !values.isPrivate,
                     password: values.password,
                     tagsIds: tagsIds,
                 });
