@@ -10,7 +10,9 @@ import {
     IconButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 type MenuProps = {
     hrefsWithNames: Array<{ name: string; href: string; icon: JSX.Element }>;
@@ -23,6 +25,10 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
 
     const handleDrawerClose = () => {
         setIsDrawerOpen(false);
+    };
+    const onLogOutButtonClick = () => {
+        handleDrawerClose();
+        void signOut();
     };
     return (
         <>
@@ -57,9 +63,21 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
                                     />
                                 </ListItemButton>
                             </ListItem>
+
                             <Divider sx={{ bgcolor: "#b7b7b7de" }} />
                         </motion.div>
                     ))}
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={onLogOutButtonClick}>
+                            <ListItemIcon onClick={() => void signOut()}>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={"Wyloguj się".toUpperCase()}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+                    <Divider sx={{ bgcolor: "#b7b7b7de" }} />
                 </List>
             </Drawer>
         </>

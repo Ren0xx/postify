@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery, IconButton } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { type Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import LogoutIcon from "@mui/icons-material/Logout";
 import ChatIcon from "@mui/icons-material/Chat";
 import HomeIcon from "@mui/icons-material/Home";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -46,15 +48,24 @@ const Navigation = ({ sessionData }: NavProps) => {
             {isMobile ? (
                 <SideMenu hrefsWithNames={hrefsWithNames} />
             ) : (
-                hrefsWithNames.map((obj) => (
-                    <Typography
-                        variant='body2'
-                        key={obj.href}
-                        href={obj.href}
-                        component={Link}>
-                        {obj.name.toUpperCase()}
-                    </Typography>
-                ))
+                <>
+                    <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
+                        {hrefsWithNames.map((obj) => (
+                            <Typography
+                                variant='body2'
+                                key={obj.href}
+                                href={obj.href}
+                                component={Link}>
+                                {obj.name.toUpperCase()}
+                            </Typography>
+                        ))}
+                    </Box>
+                    <IconButton
+                        onClick={() => void signOut()}
+                        sx={{ color: "#fff" }}>
+                        <LogoutIcon />
+                    </IconButton>
+                </>
             )}
         </Box>
     );
