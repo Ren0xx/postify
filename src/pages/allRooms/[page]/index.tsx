@@ -1,15 +1,16 @@
 import { useState } from "react";
 import SignIn from "@/components/SignIn";
-import useIsLogged from "@/hooks/useIsLogged";
+import useSessionState from "@/hooks/useSessionState";
 import RoomsList from "@/components/Rooms/RoomsList";
 import TagsFilter from "@/components/Rooms/TagsFilter";
 import ThreeDotsWave from "@/components/Animations/ThreeDotsWave";
+import SiteLoading from "@/components/utils/SiteLoading";
 import { api } from "@/utils/api";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { PageTransition } from "@/components/Animations/PageTransition";
 export default function Rooms() {
-    const isLogged = useIsLogged();
+    const status = useSessionState();
     const router = useRouter();
 
     const currentPage =
@@ -30,15 +31,15 @@ export default function Rooms() {
     };
 
     const { data: allTags } = api.tag.getAll.useQuery(undefined, {
-        enabled: isLogged === true,
+        enabled: status === "authenticated",
     });
     const { data, isLoading, isError } = api.room.getRoomsPaginated.useQuery(
         { page: currentPage, tags: selectedTags },
-        { enabled: isLogged === true }
+        { enabled: status === "authenticated" }
     );
-    if (!isLogged) {
-        return <SignIn />;
-    }
+    if (status === "loading") return <SiteLoading />;
+    if (status === "unauthenticated") return <SignIn />;
+
     if (isError) {
         return (
             <>
