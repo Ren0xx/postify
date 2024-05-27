@@ -80,7 +80,7 @@ const AddTagsModal = (props: TagProps) => {
                         // eslint-disable-next-line @typescript-eslint/no-misused-promises
                         onClick={addTags}
                         loading={addMany.isLoading}
-                        loadingIndicator='Wczytywanie…'
+                        loadingIndicator='Loading...…'
                         variant='outlined'>
                         Dodaj
                     </LoadingButton>

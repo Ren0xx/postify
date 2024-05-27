@@ -11,11 +11,11 @@ const CreateRoom = () => {
             <Grid item xs={7}>
                 <Box mx={4}>
                     <Typography variant='h3'>
-                        Stwórz swój pierwszy pokój już teraz!
+                        Create your first room now!
                     </Typography>
                     <Typography mt={2}>
-                        Rozmawiaj z ludźmi na całym świecie z podobnymi
-                        zainteresowaniami.
+                        Talk with people from around the world with the same
+                        interests
                     </Typography>
                 </Box>
             </Grid>

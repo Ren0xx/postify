@@ -21,7 +21,7 @@ const RealtimeDisplay: React.FC = () => {
     return (
         <section>
             <Typography variant='h4' textAlign={"center"} m={6}>
-                Odkryj efektywność czatu w czasie rzeczywistym!
+                Discover effectiveness of real-time chat!
             </Typography>
             <video autoPlay loop key={videoKey} width='100%'>
                 {videoKey === "small" ? (

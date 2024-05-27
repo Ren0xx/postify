@@ -21,19 +21,23 @@ const Navigation = ({ sessionData }: NavProps) => {
 
     const hrefsWithNames = useMemo(
         () => [
-            { name: "Strona główna", href: "/", icon: <HomeIcon /> },
+            { name: "Main page", href: "/", icon: <HomeIcon /> },
             {
-                name: "Wszystkie pokoje",
+                name: "Chatrooms",
                 href: "/allRooms/1",
                 icon: <ChatIcon />,
             },
             {
-                name: "Twój profil",
+                name: "Your profile",
                 href: `/users/${sessionData?.user.id ?? "no-user"}`,
                 icon: <AccountBoxIcon />,
             },
-            { name: "Ustawienia", href: "/settings", icon: <SettingsIcon /> },
-            { name: "O Projekcie", href: "/about-project", icon: <InfoIcon /> },
+            { name: "Settings", href: "/settings", icon: <SettingsIcon /> },
+            {
+                name: "About the project",
+                href: "/about-project",
+                icon: <InfoIcon />,
+            },
         ],
         [sessionData]
     );
@@ -49,7 +53,13 @@ const Navigation = ({ sessionData }: NavProps) => {
                 <SideMenu hrefsWithNames={hrefsWithNames} />
             ) : (
                 <>
-                    <Box sx={{display: "flex", alignItems: "center", gap: 1}}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 4,
+                            mx: 2,
+                        }}>
                         {hrefsWithNames.map((obj) => (
                             <Typography
                                 variant='body2'

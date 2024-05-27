@@ -4,7 +4,7 @@ const RoomNotFound = () => {
     return (
         <>
             <Head>
-                <title>Pokój nieznaleziony</title>
+                <title>Room not found</title>
             </Head>
             <Box
                 id='room-not-found'

@@ -18,9 +18,9 @@ const useUserDescription = (isLogged: boolean) => {
         description: yup
             .string()
             .trim()
-            .required("To pole jest wymagane")
-            .min(1, "Wypełnij to pole")
-            .max(120, "Opis nie może być dłuższy niż 120 znaków"),
+            .required("This field is required")
+            .min(1, "Fill this field")
+            .max(120, "Description cannot be longer than 120 characters"),
     });
     const formik = useFormik({
         initialValues: {

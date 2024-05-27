@@ -6,24 +6,24 @@ const Features = () => {
     const { data: sessionData } = useSession();
     const hrefsWithNames = useMemo(
         () => [
-            { name: "Strona główna", href: "/" },
+            { name: "Main Page", href: "/" },
             {
-                name: "Wszystkie pokoje",
+                name: "Rooms",
                 href: "/allRooms/1",
             },
             {
-                name: "Twój profil",
+                name: "Your Profile",
                 href: `/users/${sessionData?.user.id ?? "no-user"}`,
             },
-            { name: "Ustawienia", href: "/settings" },
-            { name: "O Projekcie", href: "/about-project" },
+            { name: "Settings", href: "/settings" },
+            { name: "About the Project", href: "/about-project" },
         ],
         [sessionData]
     );
     return (
         <div>
             <Typography variant='h5' mb={2} textAlign='center'>
-                Funkcjonalności
+                Functionalities
             </Typography>
             <Box
                 sx={{

@@ -6,7 +6,7 @@ const InfoSection = (props: InfoProps) => {
     return (
         <>
             <h1>
-                Pokój : <i>{name}</i>
+                Room: <i>{name}</i>
             </h1>
         </>
     );

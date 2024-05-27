@@ -6,26 +6,25 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { PageTransition } from "@/components/Animations/PageTransition";
+
 export default function PrivacyPolicy() {
     return (
         <PageTransition>
             <Typography variant='h2' textAlign={"center"} my={4}>
-                Polityka prywatności
+                Privacy Policy
             </Typography>
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel1a-content'
                     id='panel1a-header'>
-                    <Typography>1. Wprowadzenie</Typography>
+                    <Typography>1. Introduction</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        Niniejsza Polityka Prywatności określa, w jaki sposób
-                        zbieramy, przechowujemy, używamy i chronimy Twoje dane
-                        osobowe. Prosimy o dokładne zapoznanie się z jej
-                        treścią, aby zrozumieć nasze zasady i praktyki związane
-                        z prywatnością.
+                        This Privacy Policy outlines how we collect, store, use,
+                        and protect your personal data. Please read it carefully
+                        to understand our privacy practices and principles.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -34,20 +33,18 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel2a-content'
                     id='panel2a-header'>
-                    <Typography>2. Rodzaje Zbieranych Danych</Typography>
+                    <Typography>2. Types of Data Collected</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        2.1. Dane osobowe: Możemy zbierać informacje, takie jak
-                        imię, nazwisko, adres e-mail i inne dane kontaktowe,
-                        które nam udostępniasz w celu korzystania z naszych
-                        usług.
+                        2.1. Personal Data: We may collect information such as
+                        your name, email address, and other contact details that
+                        you provide to us for using our services.
                         <br />
-                        2.2. Dane techniczne: Podczas korzystania z naszej
-                        strony internetowej możemy automatycznie zbierać dane
-                        techniczne, takie jak adres IP, przeglądarka
-                        internetowa, system operacyjny i inne informacje
-                        dotyczące używanych urządzeń.
+                        2.2. Technical Data: While using our website, we may
+                        automatically collect technical data such as IP address,
+                        browser type, operating system, and other information
+                        about the devices you use.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -56,17 +53,16 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel3a-content'
                     id='panel3a-header'>
-                    <Typography>3. Cel Zbierania Danych</Typography>
+                    <Typography>3. Purpose of Data Collection</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        3.1. Twoje dane osobowe zbieramy w celu świadczenia
-                        usług, dostosowywania treści do Twoich potrzeb oraz
-                        analizy naszego ruchu internetowego.
+                        3.1. We collect your personal data to provide our
+                        services, customize content to your needs, and analyze
+                        our web traffic.
                         <br />
-                        3.2. Dane techniczne są wykorzystywane w celu
-                        zapewnienia bezpieczeństwa, diagnostyki i ulepszania
-                        naszych usług.
+                        3.2. Technical data is used to ensure security,
+                        diagnostics, and improvement of our services.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -75,17 +71,15 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel4a-content'
                     id='panel4a-header'>
-                    <Typography>4. Udostępnianie Danych</Typography>
+                    <Typography>4. Data Sharing</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        4.1. Nie udostępniamy Twoich danych osobowych osobom
-                        trzecim bez Twojej zgody, chyba że jest to wymagane
-                        przez prawo.
+                        4.1. We do not share your personal data with third
+                        parties without your consent unless required by law.
                         <br />
-                        4.2. Możemy udostępniać dane techniczne dostawcom usług
-                        technicznych w celu zapewnienia prawidłowego
-                        funkcjonowania naszej strony.
+                        4.2. We may share technical data with service providers
+                        to ensure the proper functioning of our website.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -94,16 +88,16 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel5a-content'
                     id='panel5a-header'>
-                    <Typography>5. Bezpieczeństwo Danych</Typography>
+                    <Typography>5. Data Security</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        5.1. Działamy w celu zabezpieczenia Twoich danych przed
-                        nieuprawnionym dostępem lub ujawnieniem.
+                        5.1. We strive to protect your data from unauthorized
+                        access or disclosure.
                         <br />
-                        5.2. Wprowadzamy odpowiednie środki bezpieczeństwa, ale
-                        prosimy o uwagę, że żadna metoda przekazywania danych
-                        przez Internet nie jest w 100% bezpieczna.
+                        5.2. We implement appropriate security measures, but
+                        please note that no method of data transmission over the
+                        Internet is 100% secure.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -112,16 +106,15 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel6a-content'
                     id='panel6a-header'>
-                    <Typography>6. Twoje Prawa</Typography>
+                    <Typography>6. Your Rights</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        6.1. Masz prawo dostępu do swoich danych osobowych, ich
-                        poprawiania, usuwania lub ograniczania przetwarzania.
+                        6.1. You have the right to access your personal data,
+                        correct it, delete it, or restrict its processing.
                         <br />
-                        6.2. Możesz w każdej chwili wycofać zgodę na
-                        przetwarzanie danych lub zgłosić sprzeciw wobec
-                        przetwarzania.
+                        6.2. You can withdraw consent for data processing or
+                        object to data processing at any time.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -130,16 +123,15 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel7a-content'
                     id='panel7a-header'>
-                    <Typography>7. Zmiany w Polityce Prywatności</Typography>
+                    <Typography>7. Changes to the Privacy Policy</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        7.1. Możemy czasami aktualizować naszą Politykę
-                        Prywatności. Każda zmiana zostanie opublikowana na
-                        naszej stronie internetowej.
+                        7.1. We may update our Privacy Policy from time to time.
+                        Any changes will be posted on our website.
                         <br />
-                        7.2. Korzystając z naszych usług po wprowadzeniu zmian,
-                        akceptujesz nową wersję Polityki Prywatności.
+                        7.2. By using our services after changes have been made,
+                        you accept the new version of the Privacy Policy.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -148,15 +140,15 @@ export default function PrivacyPolicy() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='panel8a-content'
                     id='panel8a-header'>
-                    <Typography>8. Kontakt</Typography>
+                    <Typography>8. Contact</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        8.1. W przypadku pytań lub uwag dotyczących Polityki
-                        Prywatności, prosimy o kontakt za pośrednictwem naszych
-                        danych kontaktowych.
+                        8.1. If you have any questions or comments about the
+                        Privacy Policy, please contact us using our contact
+                        details.
                         <br />
-                        Data ostatniej aktualizacji: 10.09.2023
+                        Last updated: 09/05/2024
                     </Typography>
                 </AccordionDetails>
             </Accordion>

@@ -42,8 +42,8 @@ const DeleteMessageModal = (props: ModalProps) => {
                 onClose={handleClose}
                 aria-labelledby='room-delete'>
                 <DialogContent>
-                    <h2>Czy jesteś pewien?</h2>
-                    <p>Tej operacji nie można cofnąć.</p>
+                    <h2>Are you sure?</h2>
+                    <p>You cannot undo this operation.</p>
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -51,7 +51,7 @@ const DeleteMessageModal = (props: ModalProps) => {
                         autoFocus
                         color='error'
                         variant='contained'>
-                        Usuń
+                        Delete 
                     </Button>
                 </DialogActions>
             </Dialog>

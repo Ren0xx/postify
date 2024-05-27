@@ -12,7 +12,7 @@ const RoomsList = (props: RoomsListProps) => {
     const { rooms, pagesCount, currentPage } = props;
     return (
         <div>
-            <h1>Przeszukaj pokoje.</h1>
+            <h1>Search chatrooms</h1>
             <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
                 {rooms?.map((room: Room) => (
                     <RoomCard key={room.id} room={room} />

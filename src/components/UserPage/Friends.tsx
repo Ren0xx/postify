@@ -25,7 +25,7 @@ const Friends = (props: UserProps) => {
             alignItems='center'
             sx={{ py: 4 }}>
             <Typography variant='h4' sx={{ my: 2 }}>
-                Znajomi:
+                Friends:
             </Typography>
             {friends && friends.length > 0 ? (
                 friends?.map((friend: User) => (
@@ -41,7 +41,7 @@ const Friends = (props: UserProps) => {
                     </Box>
                 ))
             ) : (
-                <Typography variant='h6'>Brak znajomych.</Typography>
+                <Typography variant='h6'>No friends yet 😢</Typography>
             )}
         </Stack>
     );

@@ -19,6 +19,7 @@ type MenuProps = {
 };
 const SideMenu = ({ hrefsWithNames }: MenuProps) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const bgColor: string = "#b7b7b7de";
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
     };
@@ -64,7 +65,7 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
                                 </ListItemButton>
                             </ListItem>
 
-                            <Divider sx={{ bgcolor: "#b7b7b7de" }} />
+                            <Divider sx={{ bgcolor: bgColor }} />
                         </motion.div>
                     ))}
                     <ListItem disablePadding>
@@ -72,12 +73,10 @@ const SideMenu = ({ hrefsWithNames }: MenuProps) => {
                             <ListItemIcon onClick={() => void signOut()}>
                                 <LogoutIcon />
                             </ListItemIcon>
-                            <ListItemText
-                                primary={"Wyloguj się".toUpperCase()}
-                            />
+                            <ListItemText primary={"Log out".toUpperCase()} />
                         </ListItemButton>
                     </ListItem>
-                    <Divider sx={{ bgcolor: "#b7b7b7de" }} />
+                    <Divider sx={{ bgcolor: bgColor }} />
                 </List>
             </Drawer>
         </>

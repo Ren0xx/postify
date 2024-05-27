@@ -14,18 +14,19 @@ const DeleteAccount = () => {
     };
     return (
         <>
-            <Typography variant='h4'>Zarządzanie kontem</Typography>
+            <Typography variant='h4'>Account management</Typography>
             <Button onClick={handleOpen} variant='contained' color='error'>
-                Usuń konto
+                Delete account
             </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 aria-labelledby='account-delete'>
-                <DialogTitle id='remove-account'>Usuń konto</DialogTitle>
+                <DialogTitle id='remove-account'>Delete account</DialogTitle>
                 <DialogContent>
                     <h2>Czy jesteś pewien?</h2>
-                    <p>Tej operacji nie można cofnąć.</p>
+                    <h2>Are you sure?</h2>
+                    <p>You cannot undo this operation.</p>
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -33,7 +34,7 @@ const DeleteAccount = () => {
                         autoFocus
                         color='error'
                         variant='contained'>
-                        Usuń konto
+                        Delete account
                     </Button>
                 </DialogActions>
             </Dialog>

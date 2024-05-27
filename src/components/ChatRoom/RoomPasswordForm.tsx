@@ -43,12 +43,12 @@ const RoomPasswordForm = (props: RoomAuthProps) => {
                 error={isError}
                 fullWidth
                 value={password}
-                label='Hasło do pokoju'
+                label='Room password'
                 id='message-content-field'
                 onChange={handleChange}
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
                 onKeyDown={handleKeyPress}
-                helperText={isError ? "Niepoprawne hasło." : ""}
+                helperText={isError ? "Password does not match." : ""}
             />
         </Box>
     );

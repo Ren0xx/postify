@@ -44,9 +44,9 @@ export default function Rooms() {
         return (
             <>
                 <Head>
-                    <title>Wystąpił błąd</title>
+                    <title>An error occurred</title>
                 </Head>
-                <h2>Wystąpił błąd.</h2>
+                <h2>An error occurred.</h2>
             </>
         );
     }
@@ -74,7 +74,7 @@ const RoomsLoader = () => {
     return (
         <>
             <Head>
-                <title>Wczytywanie...</title>
+                <title>Loading...</title>
             </Head>
             <ThreeDotsWave />
         </>

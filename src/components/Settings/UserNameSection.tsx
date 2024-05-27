@@ -16,7 +16,7 @@ const UserNameSection = ({ isLogged }: UserNameProps) => {
                 gap: 2,
                 alignItems: "center",
             }}>
-            <Typography variant='h4'>Zmień nick</Typography>
+            <Typography variant='h4'>Change your name</Typography>
             {isLoading ? (
                 <Loading />
             ) : (
@@ -44,8 +44,8 @@ const UserNameSection = ({ isLogged }: UserNameProps) => {
                         variant='contained'
                         // eslint-disable-next-line @typescript-eslint/no-misused-promises
                         loading={isLoading}
-                        loadingIndicator='Wczytywanie'>
-                        Zaktualizuj
+                        loadingIndicator='Loading'>
+                        Update
                     </LoadingButton>
                 </Box>
             )}

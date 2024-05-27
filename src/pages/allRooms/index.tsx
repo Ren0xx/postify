@@ -8,7 +8,7 @@ export default function AllRooms() {
 
     return (
         <div>
-            <h1>Trwa przekierowywanie </h1>
+            <h1>Redirecting...</h1>
         </div>
     );
 }

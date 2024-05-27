@@ -17,7 +17,7 @@ const DeleteRoomModal = (props: ModalProps) => {
     return (
         <>
             <Button onClick={handleOpen} variant='contained' color='error'>
-                Usuń pokój
+                Delete room
             </Button>
             <Dialog
                 open={open}
@@ -25,8 +25,8 @@ const DeleteRoomModal = (props: ModalProps) => {
                 aria-labelledby='room-delete'>
                 <DialogTitle id='remove-room'>Usuń pokój</DialogTitle>
                 <DialogContent>
-                    <h2>Czy jesteś pewien?</h2>
-                    <p>Tej operacji nie można cofnąć.</p>
+                    <h2>Are you sure?</h2>
+                    <p>You cannot undo this operation.</p>
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -34,7 +34,7 @@ const DeleteRoomModal = (props: ModalProps) => {
                         autoFocus
                         color='error'
                         variant='contained'>
-                        Usuń pokoj
+                        Delete room
                     </Button>
                 </DialogActions>
             </Dialog>

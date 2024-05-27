@@ -38,7 +38,7 @@ const About = (props: InfoProps) => {
                 />
                 <h1>{userName}</h1>
                 <h3>
-                    Właściciel <i>{roomsOwnedCount}</i> pokoi.
+                    Owner of <i>{roomsOwnedCount}</i> chatrooms.
                 </h3>
                 <p>{description}</p>
                 <Button
@@ -54,7 +54,7 @@ const About = (props: InfoProps) => {
                         href='/settings'
                         variant='contained'
                         sx={{ width: 300 }}>
-                        Ustawienia
+                        Settings
                     </Button>
                 ) : null}
                 <Button
@@ -62,7 +62,7 @@ const About = (props: InfoProps) => {
                     href={`/users/${userId}/roomsOwned`}
                     variant='contained'
                     sx={{ width: 300 }}>
-                    Posiadane pokoje
+                    Owned chatrooms
                 </Button>
             </Stack>
         </Box>

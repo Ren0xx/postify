@@ -39,11 +39,11 @@ const Hero = () => {
                     zIndex: 1001,
                 }}>
                 <Typography variant='h3'>
-                    Chatuj z innymi osobami bez ograniczeń
+                    Chat with others people with ease!
                 </Typography>
                 <Typography variant='body1'>
-                    Przeszukaj chaty, aby znaleźć ciekawe tematy. Wymieniaj
-                    wiadomości z osobami z kręgu twoich zainteresowań.
+                    Search chatrooms to find interesting topics. Share messages
+                    with people who share your interests.
                 </Typography>
                 <Button
                     variant='contained'
@@ -51,7 +51,7 @@ const Hero = () => {
                     component={Link}
                     href='/allRooms/1'
                     sx={{ width: 200, mt: 4 }}>
-                    Wszystkie pokoje
+                    All rooms
                 </Button>
             </Box>
         </Box>

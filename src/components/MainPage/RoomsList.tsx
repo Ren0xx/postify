@@ -16,7 +16,7 @@ const RoomsList = () => {
     return (
         <section>
             <Typography variant='h4' m={6} textAlign='center'>
-                Pokoje które mogą cię zainteresować:
+                Rooms that you might find interesting:
             </Typography>
             <Grid container spacing={4}>
                 {isLoading
@@ -30,7 +30,7 @@ const RoomsList = () => {
                               <RoomCard room={room} />
                           </Grid>
                       ))}
-                {isError && <h4>Coś poszło nie tak...</h4>}
+                {isError && <h4>Something went wrong...</h4>}
             </Grid>
         </section>
     );

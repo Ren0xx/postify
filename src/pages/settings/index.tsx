@@ -30,7 +30,7 @@ export default function Settings() {
                         gap: 2,
                         mt: 1,
                     }}>
-                    <Typography variant='h3'>Ustawienia</Typography>
+                    <Typography variant='h3'>Settings</Typography>
                     <ProfilePicture
                         height={profPictureHeight}
                         width={profPictureWidth}

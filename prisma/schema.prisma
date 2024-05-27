@@ -63,7 +63,7 @@ model VerificationToken {
 
 model Tag {
   id    String      @id @unique @default(cuid())
-  name  TagCategory @default(INNE)
+  name  TagCategory @default(OTHER)
   rooms Room[]      @relation("RoomToTag")
 
   @@unique([name])
@@ -100,5 +100,5 @@ enum TagCategory {
   NAUKA
   TECHNOLOGIA
   FILMY
-  INNE
+  OTHER
 }

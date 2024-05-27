@@ -78,7 +78,7 @@ const CreateRoomForm = () => {
                         id='alert-dialog-title'
                         textAlign='center'
                         variant='h4'>
-                        Stwórz nowy pokój
+                        Create a new room
                     </DialogTitle>
                     <form onSubmit={formik.handleSubmit}>
                         <DialogContent>
@@ -86,7 +86,7 @@ const CreateRoomForm = () => {
                                 autoFocus
                                 margin='normal'
                                 id='name'
-                                label='Nazwa pokoju'
+                                label='Room Name'
                                 type='text'
                                 fullWidth
                                 aria-label='name-input'
@@ -109,7 +109,7 @@ const CreateRoomForm = () => {
                                             onChange={formik.handleChange}
                                         />
                                     }
-                                    label='Pokój prywatny'
+                                    label='Private room'
                                 />
                             </FormGroup>
                             <TextField
@@ -117,7 +117,7 @@ const CreateRoomForm = () => {
                                 disabled={!formik.values.isPrivate}
                                 margin='normal'
                                 id='password'
-                                label='Hasło'
+                                label='Password'
                                 type='password'
                                 fullWidth
                                 aria-label='password-input'
@@ -142,7 +142,7 @@ const CreateRoomForm = () => {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        label='Tagi'
+                                        label='Tags'
                                         error={Boolean(
                                             formik.touched.tags &&
                                                 formik.errors.tags
@@ -166,7 +166,7 @@ const CreateRoomForm = () => {
                                     isRefetching
                                 }
                                 type='submit'>
-                                Utwórz
+                                Create
                             </Button>
                         </DialogActions>
                     </form>
@@ -201,7 +201,7 @@ const CreateRoomButton = ({
             endIcon={<ArrowForwardIcon />}
             onClick={handleClickOpen}
             id='open-create-room-form'>
-            Stwórz pokój
+            Create chatroom
         </Button>
     );
 };

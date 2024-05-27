@@ -25,7 +25,7 @@ const MessageForm = (props: MessageProps) => {
             <TextField
                 fullWidth
                 value={content}
-                label='Napisz coś...'
+                label='Write something...'
                 id='message-content-field'
                 onChange={handleChange}
                 onKeyDown={handleKeyPress}

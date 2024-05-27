@@ -27,7 +27,7 @@ const FriendsPage = () => {
         return (
             <>
                 <Head>
-                    <title>Wczytywanie...</title>
+                    <title>Loading...</title>
                 </Head>
                 <FriendsLoader />
             </>
@@ -37,9 +37,9 @@ const FriendsPage = () => {
         return (
             <>
                 <Head>
-                    <title>Wystąpił błąd</title>
+                    <title>An error occurred</title>
                 </Head>
-                <div>Coś poszło nie tak</div>
+                <div>Something went wrong...</div>
             </>
         );
     }
@@ -58,7 +58,7 @@ const FriendsLoader = () => {
     return (
         <>
             <Head>
-                <title>Wczytywanie...</title>
+                <title>Loading......</title>
             </Head>
             <Loading />
         </>

@@ -1,37 +1,37 @@
 import { Box, Link, Typography } from "@mui/material";
 import { AnimatedText } from "@/components/Animations/TextAnimations";
 import { PageTransition } from "@/components/Animations/PageTransition";
+
 export default function AboutProject() {
     const about = (
         <Typography variant='body1' fontSize={20} m={4}>
-            Moja praca inżynierska koncentruje się na stworzeniu aplikacji
-            internetowej, która umożliwia użytkownikom tworzenie pokoi
-            działających w czasie rzeczywistym.
+            My engineering project focuses on creating a web application that
+            allows users to create real-time rooms.
         </Typography>
     );
     const technologies = (
         <Typography variant='body1' fontSize={20} m={4}>
-            Projekt wykorzystuje technologie takie jak Next.js, TypeScript,
-            Prisma i trpc, tworząc tzw. &apos; t3 stack &apos; który zapewnia
-            wydajność i skalowalność.
+            The project utilizes technologies such as Next.js, TypeScript,
+            Prisma, and trpc, forming the so-called 't3 stack' which ensures
+            performance and scalability.
         </Typography>
     );
     const functionalities = (
         <Typography variant='body1' fontSize={20} m={4}>
-            Oprócz tego, użytkownicy mają możliwość dodawania swoich znajomych
-            oraz edytowania swoich danych osobowych, w tym opisu i nazwy.
+            Additionally, users have the ability to add their friends and edit
+            their personal information, including description and name.
         </Typography>
     );
     const contact = (
         <Typography variant='body1' fontSize={20} m={4}>
-            Jeśli jesteś zainteresowany kontaktem ze mną, napisz do{" "}
+            If you are interested in contacting me, write to{" "}
             <Link
                 variant='h6'
                 underline='none'
                 color='info.main'
                 component='a'
                 href='mailto:adamzaleski00@gmail.com?subject=Hello&body=Hello,%20how%20are%20you?'>
-                mnie.
+                me.
             </Link>
         </Typography>
     );
@@ -46,7 +46,7 @@ export default function AboutProject() {
                 px: 8,
             }}>
             <Typography variant='h2' gutterBottom textAlign={"center"}>
-                O tym projekcie
+                About this project
             </Typography>
             <AnimatedText
                 texts={[about, technologies, functionalities, contact]}

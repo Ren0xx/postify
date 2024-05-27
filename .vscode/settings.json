@@ -1,5 +1,10 @@
 {
-    "cSpell.words": ["hrefs", "Postify", "voca"],
+    "cSpell.words": [
+        "chatrooms",
+        "hrefs",
+        "Postify",
+        "voca"
+    ],
     "nextjs.files.alias": "~", // The import alias for the files to be created. Example: "~", "@", "#", etc
     "nextjs.files.extension": "tsx", // The extension of the files to be created. Example: "tsx"
     "nextjs.files.showType": true, // Show the type of the file in the file name. Example: "home.component.tsx"

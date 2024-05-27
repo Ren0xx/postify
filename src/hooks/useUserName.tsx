@@ -19,9 +19,9 @@ const useUserName = (isLogged: boolean) => {
         name: yup
             .string()
             .trim()
-            .required("To pole jest wymagane")
-            .min(1, "Wypełnij to pole")
-            .max(20, "Nazwa nie może być dłuższa niż 20 znaków"),
+            .required("This field is required")
+            .min(1, "Fill this field")
+            .max(20, "Name cannot be longer than 20 characters"),
     });
     const formik = useFormik({
         initialValues: {

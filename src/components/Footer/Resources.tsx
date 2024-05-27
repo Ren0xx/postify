@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
 const hrefsWithNames = [
-    { name: "Polityka prywatności", href: "/privacy-policy" },
+    { name: "Privacy policy", href: "/privacy-policy" },
     {
-        name: "Warunki korzystania",
+        name: "Terms of Service",
         href: "/terms-of-service",
     },
 ];
@@ -11,7 +11,7 @@ const Resources = () => {
     return (
         <div>
             <Typography variant='h5' mb={2} textAlign='center'>
-                Zasoby
+                Resources
             </Typography>
             <Box
                 sx={{

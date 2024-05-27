@@ -32,9 +32,9 @@ const RoomsOwned = () => {
         return (
             <>
                 <Head>
-                    <title>Wystąpił błąd</title>
+                    <title>An error occurred</title>
                 </Head>
-                <div>Coś poszło nie tak</div>
+                <div>Something went wrong...</div>
             </>
         );
     }
@@ -54,7 +54,7 @@ const RoomsLoader = () => {
     return (
         <>
             <Head>
-                <title>Wczytywanie...</title>
+                <title>Loading......</title>
             </Head>
             <Loading />
         </>
@@ -71,11 +71,11 @@ const RoomsNotFound = ({ isOwner }: { isOwner: boolean }) => {
                 gap: 2,
                 mt: 2,
             }}>
-            <Typography variant='h3'>Brak posiadanych pokoi.</Typography>
+            <Typography variant='h3'>No chatrooms owned yet.</Typography>
             {isOwner ? (
                 <>
                     <Typography>
-                        <i>Stwórz jeden już teraz! </i>
+                        <i>Make one right now! </i>
                     </Typography>
                     <CreateRoomForm />
                 </>

@@ -57,5 +57,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.15.0"
-  }
+  },
+  "trustedDependencies": [
+    "es5-ext"
+  ]
 }

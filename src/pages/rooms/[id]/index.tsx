@@ -60,7 +60,7 @@ export default function Room() {
         <>
             <Head>
                 <title>
-                    Pokój &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
+                    Chatroom &quot;{room?.name ?? "bez nazwy"}&quot; - Postify
                 </title>
             </Head>
             <PageTransition>

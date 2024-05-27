@@ -31,7 +31,7 @@ export default function RoomCard(props: RoomCardProps) {
                             variant='body1'
                             component='div'
                             sx={{ textAlign: "center" }}>
-                            Tagi:{" "}
+                            Tags:{" "}
                             {firstTwoTags.map((tag) => (
                                 <Typography
                                     variant='body2'

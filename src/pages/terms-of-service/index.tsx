@@ -6,26 +6,27 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { PageTransition } from "@/components/Animations/PageTransition";
+
 export default function TermsOfService() {
     return (
         <PageTransition>
             <Typography variant='h4' textAlign='center' my={4}>
-                Warunki korzystania z serwisu
+                Terms of Service
             </Typography>
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term1-content'
                     id='term1-header'>
-                    <Typography>Postanowienia ogólne</Typography>
+                    <Typography>General Provisions</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        1.1. Niniejszy Regulamin określa zasady korzystania z
-                        serwisu internetowego.
+                        1.1. These Terms of Service define the rules for using
+                        the website.
                         <br />
-                        1.2. Korzystanie z serwisu oznacza akceptację warunków
-                        zawartych w Regulaminie.
+                        1.2. Using the website signifies acceptance of the terms
+                        contained in these Terms of Service.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -35,20 +36,20 @@ export default function TermsOfService() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term2-content'
                     id='term2-header'>
-                    <Typography>Zakres Usług</Typography>
+                    <Typography>Scope of Services</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        2.1. Serwis oferuje następujące usługi:
+                        2.1. The website offers the following services:
                         <br />
-                        - Tworzenie pokojów tematycznych, w których użytkownicy
-                        mogą dyskutować na wybrane tematy.
+                        - Creating themed rooms where users can discuss selected
+                        topics.
                         <br />
-                        - Real-time czat umożliwiający użytkownikom prowadzenie
-                        rozmów w czasie rzeczywistym.
+                        - Real-time chat allowing users to have conversations in
+                        real-time.
                         <br />
-                        - Edycja profilu użytkownika, co pozwala na
-                        personalizację i dostosowanie swojego profilu.
+                        - User profile editing, which allows for personalization
+                        and customization of their profile.
                         <br />
                     </Typography>
                 </AccordionDetails>
@@ -59,16 +60,15 @@ export default function TermsOfService() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term3-content'
                     id='term3-header'>
-                    <Typography>Warunki korzystania</Typography>
+                    <Typography>Terms of Use</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        3.1. Użytkownik zobowiązuje się do korzystania z serwisu
-                        zgodnie z obowiązującymi przepisami prawa.
+                        3.1. The user agrees to use the website in accordance
+                        with applicable laws.
                         <br />
-                        3.2. Użytkownik zobowiązuje się do niepublikowania
-                        treści o charakterze obraźliwym, niezgodnym z prawem lub
-                        naruszającym prawa innych osób.
+                        3.2. The user agrees not to post content that is
+                        offensive, illegal, or violates the rights of others.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -78,15 +78,15 @@ export default function TermsOfService() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term4-content'
                     id='term4-header'>
-                    <Typography>Odpowiedzialność</Typography>
+                    <Typography>Liability</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        4.1. Administracja serwisu nie ponosi odpowiedzialności
-                        za treści zamieszczane przez użytkowników.
+                        4.1. The website administration is not responsible for
+                        content posted by users.
                         <br />
-                        4.2. Serwis zastrzega sobie prawo do usunięcia treści
-                        naruszających Regulamin.
+                        4.2. The website reserves the right to remove content
+                        that violates the Terms of Service.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -96,15 +96,16 @@ export default function TermsOfService() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term5-content'
                     id='term5-header'>
-                    <Typography>Prywatność</Typography>
+                    <Typography>Privacy</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        5.1. Serwis dba o prywatność użytkowników i przetwarza
-                        dane zgodnie z obowiązującymi przepisami.
+                        5.1. The website cares about users' privacy and
+                        processes data in accordance with applicable
+                        regulations.
                         <br />
-                        5.2. Więcej informacji na temat przetwarzania danych
-                        znajduje się w Polityce Prywatności.
+                        5.2. More information about data processing can be found
+                        in the Privacy Policy.
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -114,19 +115,20 @@ export default function TermsOfService() {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls='term6-content'
                     id='term6-header'>
-                    <Typography>Postanowienia końcowe</Typography>
+                    <Typography>Final Provisions</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        6.1. Regulamin jest wiążący dla wszystkich użytkowników
-                        serwisu.
+                        6.1. These Terms of Service are binding for all users of
+                        the website.
                         <br />
-                        6.2. Serwis zastrzega sobie prawo do zmiany Regulaminu.
+                        6.2. The website reserves the right to change the Terms
+                        of Service.
                         <br />
-                        6.3. Wszelkie spory rozstrzygane są przez sądy właściwe
-                        dla siedziby serwisu.
+                        6.3. All disputes are settled by the courts competent
+                        for the website's registered office.
                         <br />
-                        Data ostatniej aktualizacji: 12.09.2023
+                        Last updated: 09/05/2024
                     </Typography>
                 </AccordionDetails>
             </Accordion>

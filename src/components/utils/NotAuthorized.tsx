@@ -12,8 +12,8 @@ const NotAuthorized = (props: AuthProps) => {
             justifyContent='center'
             alignItems='center'
             spacing={2}>
-            <h1>Nie możesz wejść do tego pokoju.</h1>
-            <h4>Podaj hasło.</h4>
+            <h1>You cannot enter this chatroom.</h1>
+            <h4>Enter the password.</h4>
             <RoomPasswordForm roomPassword={password} roomId={roomId} />
         </Stack>
     );

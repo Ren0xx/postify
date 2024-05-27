@@ -4,7 +4,7 @@ const UserNotFound = () => {
     return (
         <>
             <Head>
-                <title>Użytkownik nieznaleziony</title>
+                <title>User not found</title>
             </Head>
             <Box
                 id='user-not-found'

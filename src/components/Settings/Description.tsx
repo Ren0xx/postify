@@ -16,7 +16,7 @@ const Description = ({ isLogged }: DescProps) => {
                 gap: 2,
                 alignItems: "center",
             }}>
-            <Typography variant='h4'>Twój opis</Typography>
+            <Typography variant='h4'>About you</Typography>
             {isLoading ? (
                 <Loading />
             ) : (
@@ -50,8 +50,8 @@ const Description = ({ isLogged }: DescProps) => {
                         type='submit'
                         // eslint-disable-next-line @typescript-eslint/no-misused-promises
                         loading={isLoading || isRefetching}
-                        loadingIndicator='Wczytywanie'>
-                        Zaktualizuj
+                        loadingIndicator='Loading'>
+                        Update
                     </LoadingButton>
                 </Box>
             )}

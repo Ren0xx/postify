@@ -21,17 +21,17 @@ const useCreateRoom = () => {
         name: yup
             .string()
             .trim()
-            .required("To pole jest wymagane")
-            .min(1, "Wypełnij to pole")
-            .max(50, "Nazwa nie może być dłuższa niż 50 znaków"),
+            .required("This field is required")
+            .min(1, "Fill this field")
+            .max(50, "Name cannot be longer than 50 characters"),
         isPrivate: yup.boolean(),
         password: yup.string().when("isPrivate", {
             is: true,
             then: (validationSchema) =>
                 validationSchema
-                    .required("Pole nie może być puste")
-                    .min(4, "Hasło musi być dłuższe niż 4 znaki.")
-                    .max(20, "Hasło nie może być dłuższe niż 20 znaków."),
+                    .required("This field is required")
+                    .min(4, "Password must be longer than 4 characters.")
+                    .max(20, "Password cannot be longer than 20 characters."),
         }),
         tags: yup
             .array(
@@ -41,7 +41,7 @@ const useCreateRoom = () => {
                 })
             )
             .required()
-            .min(1, "Wybierz chociaż 1 tag."),
+            .min(1, "Choose atleast one tag."),
     });
     const formik = useFormik({
         initialValues: {

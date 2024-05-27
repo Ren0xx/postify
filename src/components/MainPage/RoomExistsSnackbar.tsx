@@ -10,7 +10,7 @@ export default function ErrorSnackbar({ open }: SnackbarProps) {
             autoHideDuration={1000}
             anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
             <Alert severity='error' sx={{ width: "100%" }}>
-                Nazwa jest już zajęta.
+                The name is already taken.
             </Alert>
         </Snackbar>
     );

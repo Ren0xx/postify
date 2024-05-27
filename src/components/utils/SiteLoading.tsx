@@ -4,7 +4,7 @@ const SiteLoading = () => {
     return (
         <>
             <Head>
-                <title>Wczytywanie...</title>
+                <title>Loading...</title>
             </Head>
             <Backdrop open={true}>
                 <CircularProgress color='primary' />

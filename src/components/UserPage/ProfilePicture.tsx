@@ -59,7 +59,7 @@ const ProfilePicture = ({ width, height }: ImageSizeProps) => {
                         sx={{ width, height }}
                         src={sessionData?.user.image ?? "Profile picture"}
                     />
-                    <Typography>Zmień zdjęcie profilowe</Typography>
+                    <Typography>Change profile picture</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <form>
@@ -71,7 +71,7 @@ const ProfilePicture = ({ width, height }: ImageSizeProps) => {
                             accept='image/png, image/jpeg, image/jpg'
                         />
                         <Button variant='contained' onClick={handleButtonClick}>
-                            Wybierz plik
+                            Choose file
                         </Button>
                         <p>Wybrany: {file?.name.substring(0, 20)}</p>
                         <Button
