@@ -19,7 +19,7 @@ type MenuProps = {
 };
 const SideMenu = ({ hrefsWithNames }: MenuProps) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const bgColor: string = "#b7b7b7de";
+    const bgColor = "#b7b7b7de";
     const handleDrawerOpen = () => {
         setIsDrawerOpen(true);
     };

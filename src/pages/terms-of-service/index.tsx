@@ -100,7 +100,7 @@ export default function TermsOfService() {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        5.1. The website cares about users' privacy and
+                        5.1. The website cares about users &apos; privacy and
                         processes data in accordance with applicable
                         regulations.
                         <br />
@@ -126,7 +126,7 @@ export default function TermsOfService() {
                         of Service.
                         <br />
                         6.3. All disputes are settled by the courts competent
-                        for the website's registered office.
+                        for the website &apos;s registered office.
                         <br />
                         Last updated: 09/05/2024
                     </Typography>

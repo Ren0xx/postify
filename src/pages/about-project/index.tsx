@@ -12,8 +12,8 @@ export default function AboutProject() {
     const technologies = (
         <Typography variant='body1' fontSize={20} m={4}>
             The project utilizes technologies such as Next.js, TypeScript,
-            Prisma, and trpc, forming the so-called 't3 stack' which ensures
-            performance and scalability.
+            Prisma, and trpc, forming the so-called &apos; t3 stack &apos; which
+            ensures performance and scalability.
         </Typography>
     );
     const functionalities = (

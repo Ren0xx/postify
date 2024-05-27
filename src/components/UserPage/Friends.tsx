@@ -1,5 +1,5 @@
 import FriendCard from "./FriendCard";
-import { Box, Stack, Paper, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { type RouterOutputs } from "@/utils/api";
 import { api } from "@/utils/api";
 type User = RouterOutputs["user"]["getUser"];
